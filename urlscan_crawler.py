@@ -22,9 +22,9 @@ def crawl_urlscan():
         #####################
         # control
         #####################
-        # if idx <= 100000:
+        # if idx <= 7834:
         #     continue
-        # if idx > 200000:
+        # if idx > 7837:
         #     break
         #####################
         urls = {
@@ -68,6 +68,7 @@ def crawl_urlscan():
             file.write(driver.page_source)
             file.close()
 
+    driver.close()
     return
 
 def main():
@@ -87,8 +88,11 @@ if __name__ == '__main__':
 # save_webpage(url, download_folder, **kwargs)
 
 
-## usage python urlscan_crawler.py uuid.csv
+## usage python3 urlscan_crawler.py uuid.csv
+
 ## uuid.csv must have a column named UUID
+
+## Results
 ## urlscan/
 ## urlscan/uuid
 ## urlscan/uuid/result_page.html
