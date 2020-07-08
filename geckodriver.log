@@ -30724,3 +30724,11 @@ http://requirejs.org/docs/errors.html#scripterror
 JavaScript error: resource://devtools-client-jsonview/lib/require.js, line 170: Error: Script error for: devtools/client/shared/components/tree/TreeView
 http://requirejs.org/docs/errors.html#scripterror
 1594038474342	Marionette	INFO	Stopped listening on port 44821
+1594204115015	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileEA4aLX"
+1594204126592	Marionette	INFO	Listening on port 44581
+1594204126690	Marionette	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+1594204157045	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileHKshDg"
+1594204160150	Marionette	INFO	Listening on port 42431
+1594204160157	Marionette	WARN	TLS certificate errors will be ignored for this session
+1594204176612	Marionette	INFO	Stopped listening on port 42431
