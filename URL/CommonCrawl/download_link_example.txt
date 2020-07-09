@@ -1,0 +1,3 @@
+https://commoncrawl.s3.amazonaws.com/<filename in .path file>
+e.g.
+https://commoncrawl.s3.amazonaws.com/cc-index/collections/CC-MAIN-2020-24/indexes/cluster.idx
