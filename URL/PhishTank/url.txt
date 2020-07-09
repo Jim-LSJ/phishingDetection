@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 url
->>>>>>> cd81b1e75ae57f2a5789625da11074d14a76a333
 http://www.zonasegurabeta-viabcp.envio-smsperu.com/
 http://www.zonasegurabeta-viabcp.envio-smsperu.com/app/template/login/waiting.php
 https://reactivaperu-b-c-p.info/iniciar-sesion
