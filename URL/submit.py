@@ -21,7 +21,7 @@ def urlscan(url):
     #     return None
 
 def main():
-    f_out = open(os.path.join("/".join(sys.argv[1].split('/')[0:-1]),"uuid.txt"), "a+")
+    f_out = open(os.path.join("\\".join(sys.argv[1].split('\\')[0:-1]),"uuid.txt"), "a+")
 
     file = open(sys.argv[1])
     rows = csv.reader(file)
