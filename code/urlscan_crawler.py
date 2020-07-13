@@ -18,7 +18,7 @@ def crawl_urlscan():
     uuidFile = pd.read_csv(sys.argv[1])
     uuids = uuidFile["UUID"]
     for idx, uuid in enumerate(uuids.values):
-        print("{}/{}, {}".format(idx, len(uuidFile), uuid))
+        print("\r{}/{}, {}".format(idx, len(uuidFile), uuid), end="")
         #####################
         # control
         #####################
@@ -39,14 +39,12 @@ def crawl_urlscan():
             try:
                 driver.get(url)
             except common.exceptions.TimeoutException:
-                print('{} Timeout'.format(url))
+                print('\n{} Timeout'.format(url))
                 continue
             except common.exceptions.NoSuchElementException:
-                print('{} cannot find code'.format(url))
+                print('\n{} cannot find code'.format(url))
                 continue
             
-
-
             ####################################
             # wait for dynamically loading html
             ####################################
@@ -75,17 +73,11 @@ def main():
     if 'urlscan' not in os.listdir('.'):
         os.mkdir('urlscan')
     crawl_urlscan()
+    print("\nFinish Crawl")
 
 if __name__ == '__main__':
     main()
 
-
-#### clone a website
-# from pywebcopy import save_webpage
-# url = 'http://some-site.com/some-page.html'
-# download_folder = '/path/to/downloads/'    
-# kwargs = {'bypass_robots': True, 'project_name': 'recognisable-name'}
-# save_webpage(url, download_folder, **kwargs)
 
 
 ## usage python3 urlscan_crawler.py uuid.csv

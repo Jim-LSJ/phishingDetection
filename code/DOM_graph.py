@@ -82,7 +82,7 @@ def construct_all():
         uuids.loc[idx, "Graph"] = construct_one_dom(uuid)
         NODE_COUNTER = 0
 
-    uuids.to_csv(sys.argv[1].split('.')[0] + "_graph_100.csv", index=False)
+    uuids.to_csv(sys.argv[1].split('.')[0] + "_graph.csv", index=False)
     return
 
 def visualize_graph_focus(A):
@@ -92,7 +92,7 @@ def visualize_graph_focus(A):
 
 def main():
     try:
-        os.makedirs(os.path.join("graph", "DOM_tree_100"))
+        os.makedirs(os.path.join("graph", "DOM_tree"))
     except:
         pass
     construct_all()

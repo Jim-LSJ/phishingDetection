@@ -28,8 +28,6 @@ def crawl_website(uuid):
             print('{} cannot find code'.format(url))
             continue
         
-
-
         ####################################
         # wait for dynamically loading html
         ####################################

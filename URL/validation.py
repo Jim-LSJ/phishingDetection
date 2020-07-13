@@ -19,3 +19,5 @@ if __name__ == "__main__":
     # if sys.argv[1] == "label":
     #     label_validation()
     label_validation()
+
+## Usage: python3 code/validate_urlscan_files.py

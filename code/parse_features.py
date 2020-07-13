@@ -30,16 +30,13 @@ def parse_cookies(uuid = "0a1d3d77-6842-4c3d-b0b0-229f60ac5056"):
         secure += tds[0].span.attrs['class'][-1] == "green"
         session += tds[1].span.attrs['class'][-1] == "green"
         httponly += tds[2].span.attrs['class'][-1] == "green"
-        httponly_session += session and httponly
-        no_httponly_session += session and (not httponly)
         # print("secure: {}, session: {}, http-only: {}, no http-only sess: {}, http-only sess: {}".
         #        format(secure, session, httponly, no_httponly_session, httponly_session))
     
-    return {"Cookies": total_cookies, "secure":secure, "session": session, "httponly": httponly,
-            "no httponly sess": no_httponly_session, "httponly sess": httponly_session}
+    return {"Cookies": total_cookies, "secure":secure, "session": session, "httponly": httponly}
 
 def parse_all_cookies():
-    uuids = pd.read_csv(os.path.join("URL", "uuid_graph.csv"))
+    uuids = pd.read_csv(os.path.join(sys.argv[1], "uuid_graph.csv"))
     for idx, uuid in enumerate(uuids["UUID"].tolist()):
         print("\r{}/{}, {}".format(idx+1, len(uuids), uuid), end="")
         try:
@@ -60,10 +57,8 @@ def parse_all_cookies():
         uuids.loc[idx, "secure"] = cookies["secure"]
         uuids.loc[idx, "session"] = cookies["session"]
         uuids.loc[idx, "httponly"] = cookies["httponly"]
-        uuids.loc[idx, "httponly session"] = cookies["httponly sess"]
-        uuids.loc[idx, "no httponly session"] = cookies["no httponly sess"]
         
-    uuids.to_csv(os.path.join("URL", "uuid_graph.csv"))
+    uuids.to_csv(os.path.join(sys.argv[1], "uuid_graph.csv"), index=False)
     print("\nFinish Cookies Parse")
 
     return
@@ -85,7 +80,7 @@ def parse_js_var(uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709"):
     return {"JSGlobalVar": total_js_var}
 
 def parse_all_js():
-    uuids = pd.read_csv(os.path.join("URL", "uuid_graph.csv"))
+    uuids = pd.read_csv(os.path.join(sys.argv[1], "uuid_graph.csv"))
     for idx, uuid in enumerate(uuids["UUID"].tolist()):
         print("\r{}/{}, {}".format(idx+1, len(uuids), uuid), end="")
         try:
@@ -101,7 +96,7 @@ def parse_all_js():
 
         uuids.loc[idx, "JSGlobalVar"] = js_var["JSGlobalVar"]
 
-    uuids.to_csv(os.path.join("URL", "uuid_graph.csv"))
+    uuids.to_csv(os.path.join(sys.argv[1], "uuid_graph.csv"), index=False)
     print("\nFinish JS Parse")
 
     return 
@@ -141,7 +136,7 @@ def parse_result(uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709"):
     return stats_dict
 
 def parse_results():
-    uuids = pd.read_csv(os.path.join("URL", "uuid_graph.csv"))
+    uuids = pd.read_csv(os.path.join(sys.argv[1], "uuid_graph.csv"))
     for idx, uuid in enumerate(uuids["UUID"].tolist()):
         print("\r{}/{}, {}".format(idx+1, len(uuids), uuid), end="")
         try:
@@ -158,7 +153,7 @@ def parse_results():
         for key, value in stats.items():
             uuids.loc[idx, key] = value
 
-    uuids.to_csv(os.path.join("URL", "uuid_graph.csv"))
+    uuids.to_csv(os.path.join(sys.argv[1], "uuid_graph.csv"), index=False)
     print("\nFinish Result Parse")
 
     return
@@ -211,7 +206,7 @@ def parse_dom(uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709"):
     return tags
 
 def parse_all_dom():
-    uuids = pd.read_csv(os.path.join("URL", "uuid_graph.csv"))
+    uuids = pd.read_csv(os.path.join(sys.argv[1], "uuid_graph.csv"))
     for idx, uuid in enumerate(uuids["UUID"].tolist()):
         print("\r{}/{}, {}".format(idx+1, len(uuids), uuid), end="")
         try:
@@ -228,17 +223,18 @@ def parse_all_dom():
         for key, value in tags.items():
             uuids.loc[idx, key] = value
 
-    uuids.to_csv(os.path.join("URL", "uuid_graph.csv"))
+    uuids.to_csv(os.path.join(sys.argv[1], "uuid_graph.csv"), index=False)
     print("\nFinish DOM Parse")
 
     return
 
 def parse():
     parse_all_dom()
-    # parse_all_cookies()
+    parse_all_cookies()
     parse_all_js()
     parse_results()
     
 if __name__ == "__main__":
     parse()
 
+## Usage python3 code/parse_features.py <URL/20200710>
