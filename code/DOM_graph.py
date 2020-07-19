@@ -7,7 +7,7 @@ import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 
-NUM_OF_NODES = 1000
+NUM_OF_NODES = 100
 NODE_COUNTER = 0
 
 def traverse(node, A, X, parent_node_idx, node_idx, property_list, depth, depth_list):
@@ -37,10 +37,9 @@ def traverse(node, A, X, parent_node_idx, node_idx, property_list, depth, depth_
 
     return
 
-def construct_one_dom(uuid = "8e441f5e-44de-4a59-a505-9990c927d628"):
+def construct_one_dom(graph_folder, uuid = "8e441f5e-44de-4a59-a505-9990c927d628"):
     global NODE_COUNTER, NUM_OF_NODES
-    path = os.path.join("urlscan", uuid, "dom_page.html")
-    file = open(path)
+    file = open(os.path.join("urlscan", graph_folder, uuid, "dom_page.html"))
     soup = BeautifulSoup(file.read(), "html.parser")
     file.close()
     
@@ -66,7 +65,7 @@ def construct_one_dom(uuid = "8e441f5e-44de-4a59-a505-9990c927d628"):
     traverse(soup, A, X, parent_node_idx=0, node_idx=NODE_COUNTER, property_list=property_list,
             depth=0, depth_list=depth_list)
     
-    np.savez(os.path.join("graph", "DOM_tree_100", uuid + ".npz"), A=A, X=X)
+    np.savez(os.path.join("graph", "DOM_tree", graph_folder, uuid + ".npz"), A=A, X=X)
 
     # print(A)
     # print(X)
@@ -76,13 +75,13 @@ def construct_one_dom(uuid = "8e441f5e-44de-4a59-a505-9990c927d628"):
 
 def construct_all():
     global NODE_COUNTER
-    uuids = pd.read_csv(sys.argv[1]) # <URL/OpenPhish/uuid.txt>
+    uuids = pd.read_csv(sys.argv[1]) # <URL/20200717/feature.csv>
     for idx, uuid in enumerate(uuids["UUID"]):
         print("\r{}/{}, {}".format(idx+1, len(uuids), uuid), end="")
-        uuids.loc[idx, "Graph"] = construct_one_dom(uuid)
+        uuids.loc[idx, "Graph"] = construct_one_dom(sys.argv[1].split("/")[1], uuid)
         NODE_COUNTER = 0
 
-    uuids.to_csv(sys.argv[1].split('.')[0] + "_graph.csv", index=False)
+    uuids.to_csv(sys.argv[1], index=False) # <URL/20200717/feature.csv>
     return
 
 def visualize_graph_focus(A):
@@ -92,7 +91,7 @@ def visualize_graph_focus(A):
 
 def main():
     try:
-        os.makedirs(os.path.join("graph", "DOM_tree"))
+        os.makedirs(os.path.join("graph", "DOM_tree", sys.argv[1].split("/")[1]))
     except:
         pass
     construct_all()
@@ -103,4 +102,6 @@ def main():
 if __name__ == "__main__":
     main()
 
-## Usage: python3 DOM_graph.py <URL/OpenPhish/uuid.txt>
+## Usage: python3 DOM_graph.py <URL/20200717/feature.csv>
+
+# TODO: A , N with 500 node or 100 node

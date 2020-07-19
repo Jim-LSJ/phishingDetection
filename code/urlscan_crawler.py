@@ -22,7 +22,7 @@ def crawl_urlscan():
         #####################
         # control
         #####################
-        # if idx <= 7834:
+        # if idx <= 2794:
         #     continue
         # if idx > 7837:
         #     break
@@ -60,9 +60,12 @@ def crawl_urlscan():
             #     continue
             ####################################
 
-            if uuid not in os.listdir("urlscan"):
-                os.makedirs(os.path.join("urlscan", uuid))
-            file = open(os.path.join("urlscan", uuid, key + ".html"), "w+")
+            try:
+                os.makedirs(os.path.join("urlscan", sys.argv[1].split("/")[1], uuid))
+            except:
+                pass
+
+            file = open(os.path.join("urlscan", sys.argv[1].split("/")[1], uuid, key + ".html"), "w+")
             file.write(driver.page_source)
             file.close()
 
@@ -80,7 +83,7 @@ if __name__ == '__main__':
 
 
 
-## usage python3 urlscan_crawler.py uuid.csv
+## usage python3 code/urlscan_crawler.py URL/CommonCrawl_3/uuid.txt
 
 ## uuid.csv must have a column named UUID
 

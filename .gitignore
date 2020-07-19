@@ -1,5 +1,5 @@
 /urlscan
 /json
 /graph
-/*.csv
 /geckodriver.log
+/geckodriver
