@@ -1,5 +1,27 @@
 # Phishing Detection
 
+# Data now
+1. Phishing: 
+      20200702_1
+      20200702_2
+      20200702_3
+      20200710
+      20200711
+      20200712
+      20200713
+      20200714
+      20200717
+      20200719
+2. CommonCrawl:
+      CommonCrawl_0
+      CommonCrawl_1
+      CommonCrawl_2
+      CommonCrawl_3
+      CommonCrawl_4
+      CommonCrawl_5 (already parsed but not merge all)
+      CommonCrawl_6 (already parsed but not merge all)
+      CommonCrawl_7 (crawling now)
+      CommonCrawl_8 (already submitted but not crawl)
 # Folders
 1. code folder includes all code
 2. geckodriver folder include the geckodriver for firefox (used while collecting data from browser)
