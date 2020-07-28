@@ -1,21 +1,20 @@
 import pandas as pd
 import sys
 
-df = pd.read_csv(sys.argv[1])
+def data_preprocessing(df):
+    # df = pd.read_csv(sys.argv[1])
+    print("Initial:", df.shape)
 
-print("Initial:", df.shape)
+    df = df.dropna()
+    print("Dropna:", df.shape)
 
-df = df.dropna()
+    df = df.drop_duplicates("URL")
+    print("Drop duplicate URL:", df.shape)
 
-print("Dropna:", df.shape)
+    df = df[df["Tags"] > 50]
+    print("Tags > 50:", df.shape)
 
-df = df.drop_duplicates("URL")
-
-print("Drop duplicate URL:", df.shape)
-
-df = df[df["Tags"] > 50]
-
-print("Tags > 50:", df.shape)
+    return df
 
 # df.to_csv(sys.argv[1].split(".")[0] + "_preprocessed.csv")
 

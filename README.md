@@ -12,16 +12,35 @@
       20200714
       20200717
       20200719
+      20200720
+      20200722
+      20200723
+      20200724
+      20200727
+      20200728 (doing all now)
+
 2. CommonCrawl:
       CommonCrawl_0
       CommonCrawl_1
       CommonCrawl_2
       CommonCrawl_3
       CommonCrawl_4
-      CommonCrawl_5 (already parsed but not merge all)
-      CommonCrawl_6 (already parsed but not merge all)
-      CommonCrawl_7 (crawling now)
-      CommonCrawl_8 (already submitted but not crawl)
+      CommonCrawl_5
+      CommonCrawl_6
+      CommonCrawl_7
+      CommonCrawl_8
+      CommonCrawl_9
+      CommonCrawl_10
+      CommonCrawl_11
+      CommonCrawl_12 (already parsed but not merged all)
+      CommonCrawl_13 (already parsed but not merged all)
+      CommonCrawl_14 (already parsed but not merged all)
+      CommonCrawl_15 (already parsed but not merged all)
+      CommonCrawl_16 (already parsed but not merged all)
+      CommonCrawl_17 (already parsed but not merged all)
+      CommonCrawl_18 (already crawled and parsing now)
+      CommonCrawl_19 (already crawled and parsing now)
+
 # Folders
 1. code folder includes all code
 2. geckodriver folder include the geckodriver for firefox (used while collecting data from browser)

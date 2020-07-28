@@ -1,5 +1,6 @@
 import pandas as pd
 import os, sys
+import data_preprocess
 
 def merge_benign():
     CC = pd.read_csv(os.path.join(sys.argv[1], "uuid.txt"))
@@ -40,6 +41,7 @@ def merge_all():
         new_data.loc[i, "graph_folder"] = sys.argv[1].split("/")[1]
 
     out = pd.concat([origin_data, new_data], axis=0, sort=False)
+    out = data_preprocess.data_preprocessing(out)
     out.to_csv(os.path.join("URL", "feature.csv"), index=False)
 
     return
