@@ -17,7 +17,10 @@
       20200723
       20200724
       20200727
-      20200728 (doing all now)
+      20200728
+      20200729
+      20200730
+      20200731
 
 2. CommonCrawl:
       CommonCrawl_0
@@ -32,14 +35,17 @@
       CommonCrawl_9
       CommonCrawl_10
       CommonCrawl_11
-      CommonCrawl_12 (already parsed but not merged all)
-      CommonCrawl_13 (already parsed but not merged all)
-      CommonCrawl_14 (already parsed but not merged all)
-      CommonCrawl_15 (already parsed but not merged all)
-      CommonCrawl_16 (already parsed but not merged all)
-      CommonCrawl_17 (already parsed but not merged all)
-      CommonCrawl_18 (already crawled and parsing now)
-      CommonCrawl_19 (already crawled and parsing now)
+      CommonCrawl_12
+      CommonCrawl_13
+      CommonCrawl_14
+      CommonCrawl_15
+      CommonCrawl_16
+      CommonCrawl_17
+      CommonCrawl_18
+      CommonCrawl_19
+
+3. Alexa (re-parsing now, not merge all and screenshot yet)
+Second, merge all for every feature.csv with new sensitive form by new rule
 
 # Folders
 1. code folder includes all code

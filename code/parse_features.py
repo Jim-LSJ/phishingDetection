@@ -7,7 +7,7 @@ def parse_cookies(uuid = "0a1d3d77-6842-4c3d-b0b0-229f60ac5056"):
     file = open(path)
     soup = BeautifulSoup(file.read(), "html.parser")
     file.close()
-    
+
     secure = session = httponly = 0
     no_httponly_session = httponly_session = 0
     if not soup.find(id="behaviour"):
@@ -30,7 +30,7 @@ def parse_cookies(uuid = "0a1d3d77-6842-4c3d-b0b0-229f60ac5056"):
         secure += tds[0].span.attrs['class'][-1] == "green"
         session += tds[1].span.attrs['class'][-1] == "green"
         httponly += tds[2].span.attrs['class'][-1] == "green"
-    
+
     return {"Cookies": total_cookies, "secure":secure, "session": session, "httponly": httponly}
 
 def parse_all_cookies():
@@ -44,7 +44,7 @@ def parse_all_cookies():
         except:
             print("\n", uuid, "failed")
             continue
-        
+
         if not cookies:
             continue
 
@@ -57,7 +57,7 @@ def parse_all_cookies():
             uuids.loc[idx, "secure"] = cookies["secure"]
             uuids.loc[idx, "session"] = cookies["session"]
             uuids.loc[idx, "httponly"] = cookies["httponly"]
-        
+
     uuids.to_csv(os.path.join(sys.argv[1], "feature.csv"), index=False)
     print("\nFinish Cookies Parse")
 
@@ -76,7 +76,7 @@ def parse_js_var(uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709"):
     for h3 in soup.find(id="behaviour").find_all("h3"):
         if h3.text.split(' ')[1] == "JavaScript":
             total_js_var = h3.text.split(' ')[0]
-    
+
     return {"JSGlobalVar": total_js_var}
 
 def parse_all_js():
@@ -99,7 +99,7 @@ def parse_all_js():
     uuids.to_csv(os.path.join(sys.argv[1], "feature.csv"), index=False)
     print("\nFinish JS Parse")
 
-    return 
+    return
 
 def parse_result(date, uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709"):
     file = open(os.path.join("urlscan", date, uuid, "result_page.html"))
@@ -121,7 +121,7 @@ def parse_result(date, uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709"):
         URL = span.text.split('\n')[1].strip()
     except:
         URL = span.text
-    
+
     stats_dict = dict()
     summary = soup.find(id="summary")
     stats = summary.find(class_="row").find(class_="row")
@@ -129,7 +129,7 @@ def parse_result(date, uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709"):
         stats_dict[stat.find_all("small")[-1].text] = stat.span.attrs.get("data-count")
 
     OutGoingLinks = soup.find(id="links").h3.text.split(' ')[0]
-    
+
     stats_dict["URL"] = URL
     stats_dict["OutGoingLinks"] = OutGoingLinks if OutGoingLinks else '0'
 
@@ -150,7 +150,7 @@ def parse_result(date, uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709"):
         for h3 in soup.find(id="behaviour").find_all("h3"):
             if h3.text.split(' ')[1] == "JavaScript":
                 total_js_var = h3.text.split(' ')[0]
-            
+
             elif h3.text.split(' ')[1] == "Cookies":
                 total_cookies = h3.text.split(' ')[0]
 
@@ -201,7 +201,7 @@ def parse_results():
 def sensitive_attr(text, sensitive_word):
     if not text:
         return False
-    
+
     for word in sensitive_word:
         if text.lower().find(word) != -1:
             return True
@@ -210,11 +210,11 @@ def sensitive_attr(text, sensitive_word):
 
 def parse_dom(sensitive_word, date, uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709"):
     tags = dict()
-    
+
     file = open(os.path.join("urlscan", date, uuid, "dom_page.html"))
     outer_soup = BeautifulSoup(file.read(), "html.parser")
     file.close()
-    
+
     if not outer_soup.pre:
         return False
 
@@ -237,7 +237,7 @@ def parse_dom(sensitive_word, date, uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709
         title = soup.find_all('title')[0].text
     except:
         pass
-    
+
     tags["div"] = len(div)
     tags["img"] = len(img)
     tags["iframe"] = len(iframe)
@@ -256,15 +256,15 @@ def parse_dom(sensitive_word, date, uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709
     # sensitive form
     for form in forms:
         inputs = form.find_all("input")
-        if len(inputs) >= 2:
+        if len(inputs) >= 1:
             if sensitive_attr(form.attrs.get("id"), sensitive_word):
                 tags["sensitive"] = 1
                 break
-            
+
             if sensitive_attr(form.attrs.get("name"), sensitive_word):
                 tags["sensitive"] = 1
                 break
-                            
+
             for _input in inputs:
                 if sensitive_attr(_input.attrs.get("id"), sensitive_word):
                     tags["sensitive"] = 1
@@ -275,7 +275,7 @@ def parse_dom(sensitive_word, date, uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709
                 if sensitive_attr(_input.attrs.get("aria-label"), sensitive_word):
                     tags["sensitive"] = 1
                     break
-            
+
             if tags.get("sensitive"):
                 break
 
@@ -286,7 +286,7 @@ def parse_dom(sensitive_word, date, uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709
 
 def parse_all_dom():
     uuids = pd.read_csv(os.path.join(sys.argv[1], "feature.csv"))
-    
+
     sensitive_word = pd.read_csv("sensitive_word.txt")["word"].tolist()
     for idx, uuid in enumerate(uuids["UUID"].tolist()):
         print("\r{}/{}, {}".format(idx+1, len(uuids), uuid), end="")
@@ -314,7 +314,7 @@ def parse():
     # parse_all_js()
     parse_results()
     parse_all_dom()
-    
+
 if __name__ == "__main__":
     parse()
 
