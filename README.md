@@ -1,7 +1,7 @@
 # Phishing Detection
 
 # Data now
-1. Phishing: 
+1. Phishing:
       20200702_1
       20200702_2
       20200702_3
@@ -87,7 +87,7 @@ Second, merge all for every feature.csv with new sensitive form by new rule
 1. Download the html files from https://drive.google.com/drive/u/1/folders/1wpvg2rYCsn0UF6OEFZiutZoIUU1e8AR_ , and unzip them (about 30GB maybe)
 2. Put the flies to the path phishingDetection/urlscan/<date folder>
     ![](https://i.imgur.com/TT8VCco.png)
-    
+
     ![](https://i.imgur.com/0fvJXG0.png)
 3. Parse the urlscan/<date>/<uuid>/dom_page.html, where date and uuid are in URL/feature.csv or URL/<date>/feature.csv
 

@@ -11,8 +11,8 @@ def data_preprocessing(df):
     df = df.drop_duplicates("URL")
     print("Drop duplicate URL:", df.shape)
 
-    df = df[df["Tags"] > 50]
-    print("Tags > 50:", df.shape)
+    # df = df[df["Tags"] > 50]
+    # print("Tags > 50:", df.shape)
 
     return df
 

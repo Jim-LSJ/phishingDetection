@@ -16,23 +16,23 @@ def screen_shot():
     # for i in range(len(urlFiles)):
     #     urlFiles.loc[i, "graph_folder"] = sys.argv[1].split("/")[1]
 
-    urlFiles = urlFiles[["URL", "UUID", "graph_folder"]]
+    urlFiles = urlFiles[["URL", "UUID", "folder"]]
     for idx in range(len(urlFiles)):
         url = urlFiles.loc[idx, "URL"]
         uuid = urlFiles.loc[idx, "UUID"]
-        folder = str(urlFiles.loc[idx, "graph_folder"])
+        folder = str(urlFiles.loc[idx, "folder"])
 
         print("\r{}/{}, {}".format(idx, len(urlFiles), url), end="")
 
         #####################
         # control
         #####################
-        # if idx <= 306:
+        # if idx <= 76682:
         #     continue
         # if idx > 7837:
         #     break
-        if folder != "Alexa":
-            continue
+        # if folder != "Alexa":
+        #     continue
         #####################
 
         try:
@@ -70,4 +70,4 @@ def main():
 if __name__ == '__main__':
     main()
 
-# Usage: python3 code/screenshot.py URL/feature_preprocessed.csv
+# Usage: python3 code/screenshot.py URL/feature_preprocess.csv

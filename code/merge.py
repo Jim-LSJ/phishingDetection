@@ -15,7 +15,7 @@ def merge_benign():
 
 def merge_phishing():
     assert ("feature.csv" not in os.listdir(sys.argv[1]) )   # avoid overwrite new data
-    
+
     OP = pd.read_csv(os.path.join(sys.argv[1], "OpenPhish", "uuid.txt"))
     PT = pd.read_csv(os.path.join(sys.argv[1], "PhishTank", "uuid.txt"))
 
@@ -38,7 +38,7 @@ def merge_all():
     new_data = pd.read_csv(os.path.join(sys.argv[1], "feature.csv"))
 
     for i in range(len(new_data)):
-        new_data.loc[i, "graph_folder"] = sys.argv[1].split("/")[1]
+        new_data.loc[i, "folder"] = sys.argv[1].split("/")[1]
 
     out = pd.concat([origin_data, new_data], axis=0, sort=False)
     out = data_preprocess.data_preprocessing(out)
@@ -57,7 +57,7 @@ if __name__=="__main__":
     else:
         merge_phishing()
         print("Finish merge phishing uuid")
-    
+
 
 ## Usage: python3 code/merge.py <URL/20200710> all
 ## Usage: python3 code/merge.py <URL/CommonCrawl_0> benign

@@ -1,9 +1,4 @@
 /urlscan
-/json
-/graph
-/geckodriver.log
 /geckodriver
 /screenshot
-/screenshot_label
-/screenshot_pred
-/screenshot_zip
+/screenshot_phishing
