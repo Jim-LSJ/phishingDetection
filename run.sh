@@ -1,51 +1,29 @@
 #!/bin/bash
 
 ## Phishing
-# python3 code/check_url.py URL/20200731
+# python3 code/check_url.py URL/20200827
 # python3 code/submit.py URL/20200731/OpenPhish/new_feed.txt
-# python3 code/submit.py URL/20200731/PhishTank/new_url.txt
-# python3 code/urlscan_crawler.py URL/20200731/OpenPhish/uuid.txt
-# python3 code/urlscan_crawler.py URL/20200731/PhishTank/uuid.txt
-# python3 code/validate_urlscan_files.py urlscan/20200731
+# python3 code/submit.py URL/20200827/PhishTank/new_url.txt
+# python3 code/urlscan_crawler.py URL/20200827/OpenPhish/uuid.txt
+# python3 code/urlscan_crawler.py URL/20200827/PhishTank/uuid.txt
+# python3 code/validate_urlscan_files.py urlscan/20200827
 # python3 code/merge.py URL/20200731 first
 # python3 code/parse_features.py URL/20200731
 # python3 code/merge.py URL/20200731 all
 
-python3 code/merge.py URL/20200702_2 all
-python3 code/merge.py URL/20200702_3 all
-python3 code/merge.py URL/20200710 all
-python3 code/merge.py URL/20200711 all
-python3 code/merge.py URL/20200712 all
-python3 code/merge.py URL/20200713 all
-python3 code/merge.py URL/20200714 all
-python3 code/merge.py URL/20200717 all
-python3 code/merge.py URL/20200719 all
-python3 code/merge.py URL/20200720 all
-python3 code/merge.py URL/20200722 all
-python3 code/merge.py URL/20200723 all
-python3 code/merge.py URL/20200724 all
-python3 code/merge.py URL/20200727 all
-python3 code/merge.py URL/20200728 all
-python3 code/merge.py URL/20200729 all
-python3 code/merge.py URL/20200730 all
-python3 code/merge.py URL/20200731 all
-python3 code/merge.py URL/CommonCrawl_0 all
-python3 code/merge.py URL/CommonCrawl_1 all
-python3 code/merge.py URL/CommonCrawl_2 all
-python3 code/merge.py URL/CommonCrawl_3 all
-python3 code/merge.py URL/CommonCrawl_4 all
-python3 code/merge.py URL/CommonCrawl_5 all
-python3 code/merge.py URL/CommonCrawl_6 all
-python3 code/merge.py URL/CommonCrawl_7 all
-python3 code/merge.py URL/CommonCrawl_8 all
-python3 code/merge.py URL/CommonCrawl_9 all
-python3 code/merge.py URL/CommonCrawl_10 all
-python3 code/merge.py URL/CommonCrawl_11 all
-python3 code/merge.py URL/CommonCrawl_12 all
-python3 code/merge.py URL/CommonCrawl_13 all
-python3 code/merge.py URL/CommonCrawl_14 all
-python3 code/merge.py URL/CommonCrawl_15 all
-python3 code/merge.py URL/CommonCrawl_16 all
-python3 code/merge.py URL/CommonCrawl_17 all
-python3 code/merge.py URL/CommonCrawl_18 all
-python3 code/merge.py URL/CommonCrawl_19 all
+python3 code/phishtank_newdata.py URL/20200831/PhishTank
+python3 code/submit.py URL/20200831/PhishTank/new_url.txt
+python3 code/urlscan_crawler.py URL/20200831/PhishTank/uuid.txt
+python3 code/validate_urlscan_files.py urlscan/20200831
+python3 code/merge.py URL/20200831 phishtank
+python3 code/parse_features.py URL/20200831
+python3 code/screenshot.py URL/20200831/feature.csv
+
+# python3 code/drop_expired.py URL/20200828/feature.csv
+# python3 code/hash_near_duplicate.py URL/20200828/feature.csv
+# python3 code/detect_sensitive.py URL/20200828/feature.csv
+# python3 code/newdata_result.py URL/20200828/feature.csv
+
+# 4.sensitive_result需要把screenshot檔名改掉，要先弄object_detection
+
+# 2.sensitive_result用在CommonCrawl之前，要先根據feature.csv中的object_detection，把screenshot中的圖片複製到label資料夾

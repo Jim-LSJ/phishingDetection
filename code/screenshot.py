@@ -12,10 +12,6 @@ def screen_shot():
 
     urlFiles = pd.read_csv(sys.argv[1])
 
-    # urlFiles = data_preprocess.data_preprocessing(urlFiles)
-    # for i in range(len(urlFiles)):
-    #     urlFiles.loc[i, "graph_folder"] = sys.argv[1].split("/")[1]
-
     urlFiles = urlFiles[["URL", "UUID", "folder"]]
     for idx in range(len(urlFiles)):
         url = urlFiles.loc[idx, "URL"]
@@ -43,6 +39,16 @@ def screen_shot():
                 pass
             time.sleep(3)
             driver.save_screenshot(os.path.join("screenshot", folder, uuid + ".png"))
+
+            try:
+                os.makedirs(os.path.join("html", folder))
+            except:
+                pass
+
+            html = driver.page_source
+            file = open(os.path.join("html", folder, uuid + ".html"), "w")
+            file.write(html)
+            file.close()
 
         except KeyboardInterrupt:
             break

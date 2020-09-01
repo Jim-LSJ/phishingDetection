@@ -1,0 +1,1 @@
+'div', 'img', 'iframe', 'a', 'script', 'external_script', 'internal_script', 'form', 'input', 'textarea', 'Tags', 'No-class Tags', 'class Tags', 'Title', 'OutGoingLinks', 'sensitive_label', 'session', 'httponly', 'Cookies', 'session & httponly'

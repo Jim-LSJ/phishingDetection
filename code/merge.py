@@ -13,6 +13,18 @@ def merge_benign():
 
     return
 
+def merge_phishtank():
+    PT = pd.read_csv(os.path.join(sys.argv[1], "PhishTank", "uuid.txt"))
+
+    for i in range(len(PT)):
+        PT.loc[i, "label"] = 1
+        PT.loc[i, "source"] = "PT"
+        PT.loc[i, "folder"] = sys.argv[1].split("/")[1]
+
+    PT.to_csv(os.path.join(sys.argv[1], "feature.csv"), index=False)
+
+    return
+
 def merge_phishing():
     assert ("feature.csv" not in os.listdir(sys.argv[1]) )   # avoid overwrite new data
 
@@ -54,6 +66,8 @@ if __name__=="__main__":
     elif sys.argv[2] == "benign":
         merge_benign()
         print("Finish merge benign uuid")
+    elif sys.argv[2] == "phishtank":
+        merge_phishtank()
     else:
         merge_phishing()
         print("Finish merge phishing uuid")

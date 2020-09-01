@@ -52,7 +52,7 @@ def crawl_website(uuid_list):
             file = open(os.path.join(sys.argv[1], uuid, key + ".html"), "w+")
             file.write(driver.page_source)
             file.close()
-        
+
     driver.close()
 
     return

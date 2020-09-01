@@ -9,7 +9,7 @@ def urlscan(url):
     headers = {'API-Key': api_key,'Content-Type':'application/json'}
     data = {"url": url, "visibility": "public"}
     response = requests.post('https://urlscan.io/api/v1/scan/',headers=headers, data=json.dumps(data))
-    
+
     try:
         r = response.json()
         print(url, response, r.get('uuid'))
@@ -28,25 +28,33 @@ def main():
     rows = csv.reader(file)
 
     count = 0
-    # init_time = time.time()
+    min_time = time.time()
+    hour_time = time.time()
+
     for url in rows:
         uuid = urlscan(url)
         if uuid:
             f_out.write(uuid)
             f_out.write("\n")
             count += 1
-        
-        # # control api limitation
-        # if count >= 5000:
-        #     print("Day limitation")
-        #     break
 
-        # if count % 60 == 0:
-        #     if time.time() - init_time < 60:
-        #         time.sleep( int(60 - init_time + time.time()) )
-            
-        #     init_time = time.time()
-        
+        # control api limitation
+        if count >= 5000:
+            print("Day limitation")
+            break
+
+        if count % 60 == 0:
+            if time.time() - min_time < 60:
+                time.sleep( int(65 - min_time + time.time()) )
+
+            min_time = time.time()
+
+        if count % 500 == 0:
+            if time.time() - hour_time < 3600:
+                time.sleep( int(3605 - hour_time + time.time()) )
+
+            hour_time = time.time()
+
     file.close()
     f_out.close()
 
