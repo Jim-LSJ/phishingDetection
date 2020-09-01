@@ -12,12 +12,13 @@ attr = [
         ]
 
 # drop duplicate
-df = df.dropna()
+a = df
+# df = df.dropna()
 a = df.drop_duplicates("hash_value")
 # a = a.drop_duplicates(attr)
 
 # phishing
-a = a[a["label"] == 1]
+a = a[a["label"] == 0]
 
 sens = a[a["sensitive_label"] == 1]
 no_sens = a[a["sensitive_label"] == 0]
@@ -54,14 +55,21 @@ case6_s = sens[(sens["sensitive_case1"] == 1) | (sens["sensitive_case2"] == 1) |
 case6_n = no_sens[(no_sens["sensitive_case1"] == 1) | (no_sens["sensitive_case2"] == 1) | (no_sens["sensitive_case3"] == 1) | (no_sens["sensitive_case4"] == 1) | (no_sens["sensitive_case5"] == 1 ) | (no_sens["sensitive_case6"] == 1)]
 print("case6:\n\tsens: {}\n\tno_sens: {}".format(case6_s.shape, case6_n.shape))
 
+# case6
+case7_s = sens[(sens["sensitive_case1"] == 1) | (sens["sensitive_case2"] == 1) | (sens["sensitive_case3"] == 1) | (sens["sensitive_case4"] == 1) | (sens["sensitive_case5"] == 1) | (sens["sensitive_case6"] == 1) | (sens["sensitive_case7"] == 1)]
+case7_n = no_sens[(no_sens["sensitive_case1"] == 1) | (no_sens["sensitive_case2"] == 1) | (no_sens["sensitive_case3"] == 1) | (no_sens["sensitive_case4"] == 1) | (no_sens["sensitive_case5"] == 1 ) | (no_sens["sensitive_case6"] == 1) | (no_sens["sensitive_case7"] == 1)]
+print("case7:\n\tsens: {}\n\tno_sens: {}".format(case7_s.shape, case7_n.shape))
+
 # case4 & object
 case4_s = sens[(sens["object_detection"] == 1) | (sens["sensitive_case1"] == 1) | (sens["sensitive_case2"] == 1) | (sens["sensitive_case3"] == 1) | (sens["sensitive_case4"] == 1) | (sens["sensitive_case5"] == 1) | (sens["sensitive_case6"] == 1)]
 case4_n = no_sens[(no_sens["object_detection"] == 1) | (no_sens["sensitive_case1"] == 1) | (no_sens["sensitive_case2"] == 1) | (no_sens["sensitive_case3"] == 1) | (no_sens["sensitive_case4"] == 1) | (no_sens["sensitive_case5"] == 1) | (no_sens["sensitive_case5"] == 1)]
 print("case & object:\n\tsens: {}\n\tno_sens: {}".format(case4_s.shape, case4_n.shape))
 
-examine = a[(a["sensitive_case1"] == 0) & (a["sensitive_case2"] == 0) & (a["sensitive_case3"] == 0) & (a["sensitive_case4"] == 0) & (a["sensitive_case5"] == 0)]# & (a["sensitive_case6"] == 0)]
+# case 1~6 not detect
+examine = a[(a["sensitive_case1"] == 0) & (a["sensitive_case2"] == 0) & (a["sensitive_case3"] == 0) & (a["sensitive_case4"] == 0) & (a["sensitive_case5"] == 0) & (a["sensitive_case6"] == 0) & (a["sensitive_case7"] == 0)]
 examine.to_csv("examine_not_detected.csv", index=False)
 
+# case 1~6 & object detection not detect
 examine = a[(a["object_detection"] == 0) & (a["sensitive_case1"] == 0) & (a["sensitive_case2"] == 0) & (a["sensitive_case3"] == 0) & (a["sensitive_case4"] == 0) & (a["sensitive_case5"] == 0) & (a["sensitive_case6"] == 0)]
 examine.to_csv("examine_not_detect_od.csv", index=False)
 
@@ -79,6 +87,9 @@ examine.to_csv("examine_case4.csv", index=False)
 
 examine = a[a["sensitive_case5"] == 1]
 examine.to_csv("examine_case5.csv", index=False)
+
+examine = a[a["sensitive_case6"] == 1]
+examine.to_csv("examine_case6.csv", index=False)
 
 ## Usage: python3 code/sensitive_result.py URL/20200826/feature.csv
 ## Usage: python3 code/sensitive_result.py feature.csv

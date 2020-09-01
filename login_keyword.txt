@@ -8,6 +8,8 @@ debit
 birthdate
 city
 addr
+e-post
+webmail
 e-mail
 email
 mail

@@ -17,10 +17,10 @@ for i in range(len(df)):
     print("\r{}/{}".format(i, len(df)), end="")
     folder = str(df.loc[i, "folder"])
     uuid = df.loc[i, "UUID"]
-    if i >= 200:
+    if i >= 400:
         break
     try:
-        if uuid + ".png" in os.listdir(os.path.join("screenshot_phishing", "sensitive_form", folder)):
+        if df.loc[i, "sensitive_label"] == 1:
             os.system("cp " + os.path.join("screenshot_phishing", "sensitive_form", folder, uuid + ".png") +
                     " " + os.path.join("examine_screenshot", "sensitive_form"))
 
@@ -44,6 +44,8 @@ for i in range(len(df)):
             file = open(os.path.join("examine_screenshot", "no_sensitive_form", uuid, "dom_page.html"), "w")
             file.write(html)
             file.close()
+    except KeyboardInterrupt:
+        break
     except:
         continue
 

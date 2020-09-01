@@ -12,23 +12,23 @@ def sensitive_attr(text, sensitive_word):
 
     return False
 
-def parse_dom(sensitive_word, login_keyword, date, uuid = "0a0be43a-7091-43ea-aa4a-e78e10a65709"):
+def parse_dom(href_keyword, button_keyword, sensitive_word, login_keyword, title_keyword, iframe_keyword, date, uuid, row):
     tags = dict()
 
-    # file = open(os.path.join("urlscan", date, uuid, "dom_page.html"))
-    # outer_soup = BeautifulSoup(file.read(), "html.parser")
-    # file.close()
-
-    # if not outer_soup.pre:
-    #     return False
-
-    # page_dom = outer_soup.pre.text
-    # soup = BeautifulSoup(page_dom, "html.parser")
-
-    file = open(os.path.join("html", date, uuid + ".html"))
+    file = open(os.path.join("urlscan", date, uuid, "dom_page.html"))
     outer_soup = BeautifulSoup(file.read(), "html.parser")
     file.close()
-    soup = outer_soup
+
+    if not outer_soup.pre:
+        return False
+
+    page_dom = outer_soup.pre.text
+    soup = BeautifulSoup(page_dom, "html.parser")
+
+    # file = open(os.path.join("html", date, uuid + ".html"))
+    # outer_soup = BeautifulSoup(file.read(), "html.parser")
+    # file.close()
+    # soup = outer_soup
 
     span = soup.find_all('span')
     button = soup.find_all('button')
@@ -69,7 +69,9 @@ def parse_dom(sensitive_word, login_keyword, date, uuid = "0a0be43a-7091-43ea-aa
             if sensitive_attr(form.text, login_keyword):
                 tags["sensitive_case1"] = 1
                 break
-
+            if sensitive_attr(form.attrs.get("action"), ["login", "logon", "sign"]):
+                tags["sensitive_case1"] = 1
+                break
             if sensitive_attr(form.attrs.get("id"), login_keyword):
                 tags["sensitive_case1"] = 1
                 break
@@ -222,6 +224,10 @@ def parse_dom(sensitive_word, login_keyword, date, uuid = "0a0be43a-7091-43ea-aa
     if tags.get("sensitive_case3") != 1:
         tags["sensitive_case3"] = 0
 
+    # tags["sensitive_case1"] = row["sensitive_case1"]
+    # tags["sensitive_case2"] = row["sensitive_case2"]
+    # tags["sensitive_case3"] = row["sensitive_case3"]
+
     # My Case4: examine title
     if not tags["sensitive_case1"] and not tags["sensitive_case2"] and not tags["sensitive_case3"]:
         title = ''
@@ -229,7 +235,7 @@ def parse_dom(sensitive_word, login_keyword, date, uuid = "0a0be43a-7091-43ea-aa
             title = soup.find_all('title')[0].text
         except:
             pass
-        if sensitive_attr(title, login_keyword):
+        if sensitive_attr(title, title_keyword):
             body = soup.body.text
             if sensitive_attr(body, login_keyword):
                 tags["sensitive_case4"] = 1
@@ -237,6 +243,9 @@ def parse_dom(sensitive_word, login_keyword, date, uuid = "0a0be43a-7091-43ea-aa
                 tags["sensitive_case4"] = 0
         else:
             tags["sensitive_case4"] = 0
+
+    if tags.get("sensitive_case4") != 1:
+        tags["sensitive_case4"] = 0
 
     # # CANTINA+ Case4: only input tag without form, check keywords in all html.text
     # # Detect in my Case2
@@ -253,21 +262,21 @@ def parse_dom(sensitive_word, login_keyword, date, uuid = "0a0be43a-7091-43ea-aa
     if not tags["sensitive_case1"] and not tags["sensitive_case2"] and not tags["sensitive_case3"] and not tags["sensitive_case4"]:
         iframes = soup.find_all("iframe")
         for iframe in iframes:
-            if sensitive_attr(iframe.attrs.get("id"), login_keyword + ["form"]):
+            if sensitive_attr(iframe.attrs.get("id"), iframe_keyword):
                 tags["sensitive_case5"] = 1
                 break
-            if sensitive_attr(iframe.attrs.get("name"), login_keyword + ["form"]):
+            if sensitive_attr(iframe.attrs.get("name"), iframe_keyword):
                 tags["sensitive_case5"] = 1
                 break
-            if sensitive_attr(iframe.attrs.get("title"), login_keyword + ["form"]):
+            if sensitive_attr(iframe.attrs.get("title"), iframe_keyword):
                 tags["sensitive_case5"] = 1
                 break
-            if sensitive_attr(iframe.attrs.get("aria-label"), login_keyword + ["form"]):
+            if sensitive_attr(iframe.attrs.get("aria-label"), iframe_keyword):
                 tags["sensitive_case5"] = 1
                 break
-            if sensitive_attr(iframe.attrs.get("src"), login_keyword + ["form"]):
-                tags["sensitive_case5"] = 1
-                break
+            # if sensitive_attr(iframe.attrs.get("src"), iframe_keyword):
+            #     tags["sensitive_case5"] = 1
+            #     break
 
     if tags.get("sensitive_case5") != 1:
         tags["sensitive_case5"] = 0
@@ -276,11 +285,12 @@ def parse_dom(sensitive_word, login_keyword, date, uuid = "0a0be43a-7091-43ea-aa
     if not tags["sensitive_case1"] and not tags["sensitive_case2"] and not tags["sensitive_case3"] and not tags["sensitive_case4"] and not tags["sensitive_case5"]:
         a = soup.find_all("a")
         for _a in a:
-            if sensitive_attr(_a.text, login_keyword):
+            if sensitive_attr(_a.text, button_keyword):
                 tags["sensitive_case6"] = 1
                 break
-            if sensitive_attr(_a.attrs.get("href"), login_keyword + ["popupwnd", "window.open"]):
+            if sensitive_attr(_a.attrs.get("href"), href_keyword):
                 tags["sensitive_case6"] = 1
+                print("Hello")
                 break
             if sensitive_attr(_a.attrs.get("onclick"), ["popupwnd", "window.open"]):
                 tags["sensitive_case6"] = 1
@@ -292,7 +302,7 @@ def parse_dom(sensitive_word, login_keyword, date, uuid = "0a0be43a-7091-43ea-aa
     if tags.get("sensitive_case6") != 1:
         buttons = soup.find_all("button")
         for button in buttons:
-            if sensitive_attr(button.text, login_keyword):
+            if sensitive_attr(button.text, button_keyword):
                 tags["sensitive_case6"] = 1
                 break
             if sensitive_attr(button.attrs.get("onclick"), ["popupwnd", "window.open", "window.location", "location.href"]):
@@ -305,26 +315,46 @@ def parse_dom(sensitive_word, login_keyword, date, uuid = "0a0be43a-7091-43ea-aa
     if tags.get("sensitive_case6") != 1:
         tags["sensitive_case6"] = 0
 
+    # My Case7: only inputs with very far description text
+    if not tags["sensitive_case1"] and not tags["sensitive_case2"] and not tags["sensitive_case3"] and not tags["sensitive_case4"] and not tags["sensitive_case5"] and not tags["sensitive_case6"]:
+        if len(soup.find_all("form")) == 0:
+            inputs = soup.find_all("input")
+            for _input in inputs:
+                current_tag = _input
+                while current_tag.name != "body" and len(current_tag.text) == 0:
+                    current_tag = current_tag.parent
+
+                if sensitive_attr(current_tag.text, login_keyword):
+                    tags["sensitive_case7"] = 1
+                    break
+
+    if tags.get("sensitive_case7") != 1:
+        tags["sensitive_case7"] = 0
+
     return tags
 
 def parse_all_dom():
     df = pd.read_csv(os.path.join(sys.argv[1]))
 
+    href_keyword = pd.read_csv("href_keyword.txt")["word"].tolist()
+    button_keyword = pd.read_csv("button_keyword.txt")["word"].tolist()
+    title_keyword = pd.read_csv("Title_keyword.txt")["word"].tolist()
+    iframe_keyword = pd.read_csv("iframe_keyword.txt")["word"].tolist()
     login_keyword = pd.read_csv("login_keyword.txt")["word"].tolist()
     sensitive_word = pd.read_csv("sensitive_word.txt")["word"].tolist()
     for idx, uuid in enumerate(df["UUID"].tolist()):
         print("\r{}/{}, {}".format(idx+1, len(df), uuid), end="")
-        try:
-            if str(df.loc[idx, "folder"])[0] != "C":
-                folder = str(int(df.loc[idx, "folder"]))
-            else:
-                folder = df.loc[idx, "folder"]
-            tags = parse_dom(sensitive_word, login_keyword, folder, uuid)
-        except KeyboardInterrupt:
-            return
-        except:
-            print("\n", uuid, "failed")
-            continue
+        # try:
+        # if str(df.loc[idx, "folder"])[0] != "C":
+        #     folder = str(int(df.loc[idx, "folder"]))
+        # else:
+        folder = str(df.loc[idx, "folder"])
+        tags = parse_dom(href_keyword, button_keyword, sensitive_word, login_keyword, title_keyword, iframe_keyword, folder, uuid, df.loc[idx])
+        # except KeyboardInterrupt:
+        #     return
+        # except:
+        #     print("\n", uuid, "failed")
+        #     continue
 
         if not tags:
             continue
@@ -340,6 +370,10 @@ def parse_all_dom():
 def parse_one_dom():
     df = pd.read_csv(os.path.join(sys.argv[1]))
 
+    href_keyword = pd.read_csv("href_keyword.txt")["word"].tolist()
+    button_keyword = pd.read_csv("button_keyword.txt")["word"].tolist()
+    title_keyword = pd.read_csv("Title_keyword.txt")["word"].tolist()
+    iframe_keyword = pd.read_csv("iframe_keyword.txt")["word"].tolist()
     login_keyword = pd.read_csv("login_keyword.txt")["word"].tolist()
     sensitive_word = pd.read_csv("sensitive_word.txt")["word"].tolist()
     for idx, uuid in enumerate(df["UUID"].tolist()):
@@ -348,17 +382,17 @@ def parse_one_dom():
         if uuid != sys.argv[2]:
             continue
 
-        try:
-            if str(df.loc[idx, "folder"])[0] != "C":
-                folder = str(int(df.loc[idx, "folder"]))
-            else:
-                folder = df.loc[idx, "folder"]
-            tags = parse_dom(sensitive_word, login_keyword, folder, uuid)
-        except KeyboardInterrupt:
-            return
-        except:
-            print("\n", uuid, "failed")
-            continue
+        # try:
+            # if str(df.loc[idx, "folder"])[0] != "C":
+            #     folder = str(int(df.loc[idx, "folder"]))
+            # else:
+        folder = str(df.loc[idx, "folder"])
+        tags = parse_dom(href_keyword, button_keyword, sensitive_word, login_keyword, title_keyword, iframe_keyword, folder, uuid, df.loc[idx])
+        # except KeyboardInterrupt:
+        #     return
+        # except:
+        #     print("\n", uuid, "failed")
+        #     continue
 
         if not tags:
             continue
